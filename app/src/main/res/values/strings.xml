@@ -7,6 +7,7 @@
 
     <!-- Activity Titles -->
     <string name="structure_information">Structure Information</string>
+    <string name="historical_events">Historical Events</string>
 
     <!-- Facts Elements -->
     <string name="poi_name">Name</string>
@@ -18,5 +19,7 @@
     <string name="poi_built_in">Built In</string>
     <string name="poi_built_by">Built By</string>
     <string name="poi_architect">Architect</string>
+    <string name="poi_year">Year</string>
+    <string name="poi_event">Event</string>
 
 </resources>

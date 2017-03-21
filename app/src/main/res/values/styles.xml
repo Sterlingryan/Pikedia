@@ -6,6 +6,8 @@
         <item name="colorPrimary">#2196F3</item>
         <item name="colorPrimaryDark">#1976D2</item>
         <item name="colorAccent">#607D8B</item>
+        <item name="colorButtonNormal">#1976D2</item>
+
     </style>
 
     <!-- Spinner Theme -->

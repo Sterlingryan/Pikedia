@@ -42,7 +42,9 @@
                             android:layout_marginEnd="25dp"
                             android:layout_marginTop="20dp"
                             android:textSize="13sp"
-                            android:textColor="@color/secondary_text"/>
+                            android:textColor="@color/secondary_text"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                             android:id="@+id/materialEditTextName"
@@ -57,7 +59,9 @@
                             app:met_textColor="@color/primary_text"
                             app:met_underlineColor="@color/colorAccent"
                             style="@style/MyEditTextTheme"
-                            android:inputType="text"/>
+                            android:inputType="text"
+                            android:nextFocusUp="@id/materialEditTextName"
+                            android:nextFocusLeft="@id/materialEditTextName"/>
 
                         <android.support.v7.widget.AppCompatTextView
                                 android:text="@string/poi_architecture_type"
