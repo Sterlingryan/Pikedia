@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Pikedia</string>
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+
+    <!-- Activity Titles -->
+    <string name="structure_information">Structure Information</string>
+
+    <!-- Facts Elements -->
+    <string name="poi_name">Name</string>
+    <string name="poi_architecture_type">Type of Architecture</string>
+    <string name="poi_artistic_style">Artistic Style</string>
+    <string name="poi_next">Next</string>
+    <string name="poi_finish">Finish</string>
+    <string name="poi_description">Description</string>
+    <string name="poi_built_in">Built In</string>
+    <string name="poi_built_by">Built By</string>
+    <string name="poi_architect">Architect</string>
+
+</resources>
