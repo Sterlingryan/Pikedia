@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:gravity="center_vertical"
+                android:background="@color/divider">
+
+    <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:title="@string/structure_information"
+            android:paddingStart="25dp"
+            android:paddingLeft="25dp"
+            android:elevation="5sp"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_below="@+id/app_bar"
+                  android:layout_alignParentStart="true"
+                  android:background="@color/cardview_light_background">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/cardview_light_background"
+                android:layout_below="@+id/app_bar">
+
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:text="@string/prt_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewLocation"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/secondary_text"/>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    app:ms_thickness="1dp"
+                    app:ms_baseColor="@color/colorAccent"
+                    app:ms_highlightColor="@color/colorPrimary"/>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:text="@string/prt_smartphone_ownership_os"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewSmartphoneOwnershipOS"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/secondary_text"/>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerSmartPhoneOS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    app:ms_thickness="1dp"
+                    app:ms_baseColor="@color/colorAccent"
+                    app:ms_highlightColor="@color/colorPrimary"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:text="@string/prt_smartphone_years"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewAge"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/secondary_text"/>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerSmartPhoneYears"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    app:ms_thickness="1dp"
+                    app:ms_baseColor="@color/colorAccent"
+                    app:ms_highlightColor="@color/colorPrimary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="15dp"
+            android:background="#EEEEEE"
+            android:id="@+id/linearLayout">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_navigate_next_black_24dp"
+                android:rotation="180"/>
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="3"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/poi_finish"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/primary_text"
+                android:layout_gravity="center"/>
+    </LinearLayout>
+</RelativeLayout>

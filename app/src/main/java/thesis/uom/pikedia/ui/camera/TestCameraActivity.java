@@ -1,5 +1,6 @@
 package thesis.uom.pikedia.ui.camera;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,7 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -23,19 +24,6 @@ import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
-
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
@@ -49,27 +37,37 @@ import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
-import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.Manifest;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 import thesis.uom.pikedia.R;
 
-
 /**
- * Created by SterlingRyan on 2/15/2017.
+ * Created by SterlingRyan on 3/23/2017.
  */
 
-public class CameraFragment extends Fragment implements View.OnClickListener, FragmentCompat.OnRequestPermissionsResultCallback {
+public class TestCameraActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Convert orientations to JPEG
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
@@ -82,10 +80,11 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     private Image mImage;
 
     // UI/Image members
-    private AutoFitTextureView mTextureView;
+    private TextureView mTextureView;
     private ImageReader mImageReader;
     private File mFile;
     private Size mPreviewSize;
+    private String mUUID;
     private final ImageReader.OnImageAvailableListener mOnImageAvailableListener =
             new ImageReader.OnImageAvailableListener() {
                 @Override
@@ -94,6 +93,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
                     ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
                     byte[] bytes = new byte[buffer.remaining()];
                     buffer.get(bytes);
+                    mFile = new File(getExternalFilesDir(null), "poipic" + mUUID + ".jpg");
                     FileOutputStream output = null;
                     try {
                         output = new FileOutputStream(mFile);
@@ -110,8 +110,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
                             }
                         }
                     }
-                    Intent intent = new Intent(getActivity(), PhotographPreview.class);
-                    intent.putExtra("imageurl", mFile.getPath());
+                    Intent intent = new Intent(getApplicationContext(), PhotographPreview.class);
+                    intent.putExtra("imagepath", mFile.getAbsolutePath());
                     startActivity(intent);
 
                 }
@@ -185,10 +185,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
             mCameraOpenCloseLock.release();
             cameraDevice.close();
             mCameraDevice = null;
-            Activity activity = getActivity();
-            if (null != activity) {
-                activity.finish();
-            }
+            finish();
         }
 
     };
@@ -289,44 +286,31 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
         // Pick the smallest of those big enough. If there is no one big enough, pick the
         // largest of those not big enough.
         if (bigEnough.size() > 0) {
-            return Collections.min(bigEnough, new CompareSizesByArea());
+            return Collections.min(bigEnough, new TestCameraActivity.CompareSizesByArea());
         } else if (notBigEnough.size() > 0) {
-            return Collections.max(notBigEnough, new CompareSizesByArea());
+            return Collections.max(notBigEnough, new TestCameraActivity.CompareSizesByArea());
         } else {
             Log.e(TAG, "Couldn't find any suitable preview size");
             return choices[0];
         }
     }
 
-    public static CameraFragment newInstance(){
-        return new CameraFragment();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_camera, container, false);
-    }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        view.findViewById(R.id.picture).setOnClickListener(this);
-        mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "poipic.jpg");
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camerapreview);
+        mTextureView = (TextureView) findViewById(R.id.texture);
         hideSystemUI();
-        getActivity().getWindow().setStatusBarColor(Color.BLACK);
+        getWindow().setStatusBarColor(Color.BLACK);
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
         startBackgroundThread();
+
+        mUUID = UUID.randomUUID().toString();
 
         // If screen is turned off and on again check if the Texture View is availible
         if(mTextureView.isAvailable()){
@@ -390,15 +374,14 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
 
     // Open the camera
     private void openCamera(int height, int width){
-        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+        if(ContextCompat.checkSelfPermission(this , Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED){
             requestCameraPermission();
             return;
         }
         setUpCameraOutputs(width,height);
         configureTransform(width,height);
-        Activity activity = getActivity();
-        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try{
             if(!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)){
                 throw new RuntimeException("Time out waiting to lock camera opening.");
@@ -413,18 +396,14 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     }
 
     public void requestCameraPermission() {
-        if (FragmentCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-            new ConfirmationDialog().show(getChildFragmentManager(), FRAGMENT_DIALOG);
-        } else {
-            FragmentCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
-                    REQUEST_CAMERA_PERMISSION);
-        }
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                REQUEST_CAMERA_PERMISSION);
     }
 
     // Sets up member variables related to camera
     private void setUpCameraOutputs(int width, int height){
-        Activity activity = getActivity();
-        CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+        CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try{
             for (String cameraId: manager.getCameraIdList()){
                 CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
@@ -444,14 +423,14 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
                 // For still images we use largest available capture size
                 Size largest = Collections.max(
                         Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
-                        new CompareSizesByArea());
+                        new TestCameraActivity.CompareSizesByArea());
                 mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
                         ImageFormat.JPEG, /*maxImages*/2);
                 mImageReader.setOnImageAvailableListener(
                         mOnImageAvailableListener, mBackgroundHandler);
 
                 // swap dimensions?
-                int displayRotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+                int displayRotation = getWindowManager().getDefaultDisplay().getRotation();
                 mSensorOrientation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
                 boolean swappedDimensions = false;
                 switch(displayRotation){
@@ -472,7 +451,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
                 }
 
                 Point displaySize = new Point();
-                activity.getWindowManager().getDefaultDisplay().getSize(displaySize);
+                getWindowManager().getDefaultDisplay().getSize(displaySize);
                 int rotatedPreviewWidth = width;
                 int rotatedPreviewHeight = height;
                 int maxPreviewWidth = displaySize.x;
@@ -500,11 +479,11 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
                 // We fit the aspect ratio of TextureView to the size of preview we picked.
                 int orientation = getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getWidth(), mPreviewSize.getHeight());
+                    mTextureView.setMinimumHeight(mPreviewSize.getHeight());
+                    mTextureView.setMinimumWidth(mPreviewSize.getWidth());
                 } else {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getHeight(), mPreviewSize.getWidth());
+                    mTextureView.setMinimumHeight(mPreviewSize.getHeight());
+                    mTextureView.setMinimumWidth(mPreviewSize.getWidth());
                 }
 
                 // Check if the flash is supported.
@@ -520,7 +499,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
             // Currently an NPE is thrown when the Camera2API is used but not supported on the
             // device this code runs.
             ErrorDialog.newInstance(getString(R.string.camera_error))
-                    .show(getChildFragmentManager(), FRAGMENT_DIALOG);
+                    .show(getFragmentManager(),FRAGMENT_DIALOG);
         }
     }
 
@@ -584,8 +563,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     // Capture a still picture
     private void captureStillPicture() {
         try {
-            final Activity activity = getActivity();
-            if (null == activity || null == mCameraDevice) {
+            if (null == mCameraDevice) {
                 return;
             }
             // This is the CaptureRequest.Builder that we use to take a picture.
@@ -599,7 +577,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
             setAutoFlash(captureBuilder);
 
             // Orientation
-            int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+            int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, getOrientation(rotation));
 
             CameraCaptureSession.CaptureCallback CaptureCallback
@@ -624,11 +602,10 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
 
     // Configures the necessary transformation to 'mTextureView'
     private void configureTransform(int viewWidth, int viewHeight) {
-        Activity activity = getActivity();
-        if (null == mTextureView || null == mPreviewSize || null == activity) {
+        if (null == mTextureView || null == mPreviewSize) {
             return;
         }
-        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
         Matrix matrix = new Matrix();
         RectF viewRect = new RectF(0, 0, viewWidth, viewHeight);
         RectF bufferRect = new RectF(0, 0, mPreviewSize.getHeight(), mPreviewSize.getWidth());
@@ -683,8 +660,8 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
 
         private static final String ARG_MESSAGE = "message";
 
-        public static ErrorDialog newInstance(String message) {
-            ErrorDialog dialog = new ErrorDialog();
+        public static CameraFragment.ErrorDialog newInstance(String message) {
+            CameraFragment.ErrorDialog dialog = new CameraFragment.ErrorDialog();
             Bundle args = new Bundle();
             args.putString(ARG_MESSAGE, message);
             dialog.setArguments(args);
@@ -729,48 +706,6 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
         }
     }
 
-
-    // Saves a JPEG in Specified File
-    private static class ImageSaver implements Runnable {
-
-        /**
-         * The JPEG image
-         */
-        private final Image mImage;
-        /**
-         * The file we save the image into.
-         */
-        private final File mFile;
-
-        public ImageSaver(Image image, File file) {
-            mImage = image;
-            mFile = file;
-        }
-
-        @Override
-        public void run() {
-            ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
-            byte[] bytes = new byte[buffer.remaining()];
-            buffer.get(bytes);
-            FileOutputStream output = null;
-            try {
-                output = new FileOutputStream(mFile);
-                output.write(bytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                mImage.close();
-                if (null != output) {
-                    try {
-                        output.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-    }
 
     private int getOrientation(int rotation) {
         // Sensor orientation is 90 for most devices, or 270 for some devices (eg. Nexus 5X)
@@ -819,18 +754,15 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     }
 
     private void showToast(final String text) {
-        final Activity activity = getActivity();
-        if (activity != null) {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    static class CompareSizesByArea implements Comparator<Size>{
+    private static class CompareSizesByArea implements Comparator<Size> {
         @Override
         public int compare(Size o1, Size o2) {
             return Long.signum((long) o1.getWidth() * o1.getHeight() -
@@ -839,7 +771,7 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
     }
 
     private void hideSystemUI(){
-        getActivity().getWindow().getDecorView().setSystemUiVisibility(
+        getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         |  View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         |  View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -858,5 +790,4 @@ public class CameraFragment extends Fragment implements View.OnClickListener, Fr
             return null;
         }
     }
-
 }

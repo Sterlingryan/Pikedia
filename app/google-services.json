@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "171605563537",
+    "firebase_url": "https://pikedia-43643.firebaseio.com",
+    "project_id": "pikedia-43643",
+    "storage_bucket": "pikedia-43643.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171605563537:android:a0019821e2092980",
+        "android_client_info": {
+          "package_name": "thesis.uom.pikedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171605563537-82f1jvgusuqim3sobtj4tf380cgan94e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "thesis.uom.pikedia",
+            "certificate_hash": "28df4eaf0c6bb8a2fa8e52737d8cfbcd99dfc5f9"
+          }
+        },
+        {
+          "client_id": "171605563537-kjruc2olmhteeu79ts6rv8g0k1t1cnhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbWyxSyozpGWLfUCGyt6BZJ-GFDkO34Bw"
+        },
+        {
+          "current_key": "AIzaSyAGLs5dX3FiHa9wwK6sdaoWknPTHS1CYMU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171605563537-kjruc2olmhteeu79ts6rv8g0k1t1cnhm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

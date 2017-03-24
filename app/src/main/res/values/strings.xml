@@ -8,6 +8,7 @@
     <!-- Activity Titles -->
     <string name="structure_information">Structure Information</string>
     <string name="historical_events">Historical Events</string>
+    <string name="basic_information">Basic Information</string>
 
     <!-- Facts Elements -->
     <string name="poi_name">Name</string>
@@ -21,5 +22,17 @@
     <string name="poi_architect">Architect</string>
     <string name="poi_year">Year</string>
     <string name="poi_event">Event</string>
+
+    <!-- Participant's Elements-->
+    <string name="prt_gender">Gender</string>
+    <string name="prt_age">Age</string>
+    <string name="prt_location">Location</string>
+    <string name="prt_smartphone_ownership_os">Smartphone Ownership OS</string>
+    <string name="prt_smartphone_years">Smartphone Ownership Years</string>
+
+    <!-- Experiment Wizard Texts -->
+    <string name="expwzd_photograph">Step 1: Face your smartphone to the front of the point of interest when taking the photograph</string>
+    <string name="expwzd_experiment">Step 2: Answer questions about the point of interest</string>
+    <string name="expwzd_feedback">Step 3: Provide feedback on the experiment</string>
 
 </resources>
