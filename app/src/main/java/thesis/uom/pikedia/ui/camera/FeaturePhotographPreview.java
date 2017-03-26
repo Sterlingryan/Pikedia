@@ -13,13 +13,13 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 
 import thesis.uom.pikedia.R;
-import thesis.uom.pikedia.ui.factswizard.BasicInformationOneActivity;
+import thesis.uom.pikedia.ui.factswizard.FeatureInformationActivity;
 
 /**
  * Created by SterlingRyan on 3/23/2017.
  */
 
-public class PhotographPreview extends AppCompatActivity {
+public class FeaturePhotographPreview extends AppCompatActivity {
 
     private ImageView mPreviewImageView;
     private ImageButton mFinishImageView;
@@ -40,7 +40,7 @@ public class PhotographPreview extends AppCompatActivity {
         mFinishImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationOneActivity.class);
+                Intent intent = new Intent(getApplicationContext(), FeatureInformationActivity.class);
                 startActivity(intent);
             }
         });

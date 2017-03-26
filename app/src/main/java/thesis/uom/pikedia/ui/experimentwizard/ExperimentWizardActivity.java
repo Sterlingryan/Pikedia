@@ -1,5 +1,6 @@
 package thesis.uom.pikedia.ui.experimentwizard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,12 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.ui.participantsinformation.ParticipantsBasicInformationOne;
 
 /**
  * Created by SterlingRyan on 3/22/2017.
@@ -38,6 +39,14 @@ public class ExperimentWizardActivity extends AppCompatActivity {
         mProgressImageView2 = (ImageView) findViewById(R.id.progressImageView2);
         mFinishButton = (ImageButton) findViewById(R.id.progressFinish);
         mFinishButton.setVisibility(View.GONE);
+
+        mFinishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ParticipantsBasicInformationOne.class);
+                startActivity(intent);
+            }
+        });
 
         initializeScreen();
     }

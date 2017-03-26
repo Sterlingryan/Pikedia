@@ -6,9 +6,10 @@
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
     <!-- Activity Titles -->
-    <string name="structure_information">Structure Information</string>
-    <string name="historical_events">Historical Events</string>
-    <string name="basic_information">Basic Information</string>
+    <string name="ttl_structure_information">Structure Information</string>
+    <string name="ttl_historical_events">Historical Events</string>
+    <string name="ttl_basic_information">Basic Information</string>
+    <string name="ttl_feature_description">Feature Description</string>
 
     <!-- Facts Elements -->
     <string name="poi_name">Name</string>
@@ -34,5 +35,10 @@
     <string name="expwzd_photograph">Step 1: Face your smartphone to the front of the point of interest when taking the photograph</string>
     <string name="expwzd_experiment">Step 2: Answer questions about the point of interest</string>
     <string name="expwzd_feedback">Step 3: Provide feedback on the experiment</string>
+
+
+
+    <string name="test">Bacon ipsum dolor amet alcatra meatloaf shankle porchetta pork chop boudin ham ham hock shank venison short ribs swine flank rump. </string>
+
 
 </resources>

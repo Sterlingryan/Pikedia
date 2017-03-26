@@ -15,7 +15,7 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.camera.TestCameraActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -23,6 +23,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.camera.PhotographPreview"/>
+        <activity android:name=".ui.camera.CameraActivity"/>
+        <activity android:name=".ui.factswizard.BasicInformationOneActivity"/>
+        <activity android:name=".ui.factswizard.BasicInformationTwoActivity"/>
+        <activity android:name=".ui.factswizard.HistoricalEventsListActivity"/>
+        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationOne"/>
+        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationTwo"/>
+        <activity android:name=".ui.experimentwizard.ExperimentWizardActivity"/>
+        <activity android:name=".ui.camera.FeatureCaptureActivity"/>
+        <activity android:name=".ui.camera.FeaturePhotographPreview"/>
+        <activity android:name=".ui.factswizard.FeatureInformationActivity"/>
+        <activity android:name=".ui.experimentwizard.PhotographyTipsActivity"/>
+        <activity android:name=".ui.experimentwizard.FeaturePhotographyTipsActivity"/>
+        <activity android:name=".ui.PointOfInterestShowCaseActivity"/>
     </application>
 
 </manifest>

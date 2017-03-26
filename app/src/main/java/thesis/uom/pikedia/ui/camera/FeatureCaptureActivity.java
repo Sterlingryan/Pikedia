@@ -67,7 +67,7 @@ import thesis.uom.pikedia.R;
  * Created by SterlingRyan on 3/23/2017.
  */
 
-public class TestCameraActivity extends AppCompatActivity implements View.OnClickListener {
+public class FeatureCaptureActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Convert orientations to JPEG
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
@@ -93,7 +93,7 @@ public class TestCameraActivity extends AppCompatActivity implements View.OnClic
                     ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
                     byte[] bytes = new byte[buffer.remaining()];
                     buffer.get(bytes);
-                    mFile = new File(getExternalFilesDir(null), "poipic" + mUUID + ".jpg");
+                    mFile = new File(getExternalFilesDir(null), mUUID + ".jpg");
                     FileOutputStream output = null;
                     try {
                         output = new FileOutputStream(mFile);
@@ -110,7 +110,7 @@ public class TestCameraActivity extends AppCompatActivity implements View.OnClic
                             }
                         }
                     }
-                    Intent intent = new Intent(getApplicationContext(), PhotographPreview.class);
+                    Intent intent = new Intent(getApplicationContext(), FeaturePhotographPreview.class);
                     intent.putExtra("imagepath", mFile.getAbsolutePath());
                     startActivity(intent);
 
@@ -286,9 +286,9 @@ public class TestCameraActivity extends AppCompatActivity implements View.OnClic
         // Pick the smallest of those big enough. If there is no one big enough, pick the
         // largest of those not big enough.
         if (bigEnough.size() > 0) {
-            return Collections.min(bigEnough, new TestCameraActivity.CompareSizesByArea());
+            return Collections.min(bigEnough, new FeatureCaptureActivity.CompareSizesByArea());
         } else if (notBigEnough.size() > 0) {
-            return Collections.max(notBigEnough, new TestCameraActivity.CompareSizesByArea());
+            return Collections.max(notBigEnough, new FeatureCaptureActivity.CompareSizesByArea());
         } else {
             Log.e(TAG, "Couldn't find any suitable preview size");
             return choices[0];
@@ -423,7 +423,7 @@ public class TestCameraActivity extends AppCompatActivity implements View.OnClic
                 // For still images we use largest available capture size
                 Size largest = Collections.max(
                         Arrays.asList(map.getOutputSizes(ImageFormat.JPEG)),
-                        new TestCameraActivity.CompareSizesByArea());
+                        new FeatureCaptureActivity.CompareSizesByArea());
                 mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
                         ImageFormat.JPEG, /*maxImages*/2);
                 mImageReader.setOnImageAvailableListener(
