@@ -47,7 +47,7 @@
                 android:id="@+id/progressFinish"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:background="@drawable/rightarrow"
+                android:background="@drawable/ic_navigate_next_white_36dp"
                 android:layout_marginBottom="26dp"
                 android:layout_marginLeft="65dp"
                 android:layout_alignParentBottom="true"

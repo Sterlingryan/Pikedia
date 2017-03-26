@@ -1,5 +1,6 @@
 package thesis.uom.pikedia.ui.factswizard;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -60,5 +61,11 @@ public class BasicInformationOneActivity extends AppCompatActivity{
                 finish();
             }
         });
+    }
+
+    public void showAddListDialog(View view) {
+        /* Create an instance of the dialog fragment and show it */
+        DialogFragment dialog = AddNewElementDialogFragment.newInstance();
+        dialog.show(BasicInformationOneActivity.this.getFragmentManager(), "AddListDialogFragment");
     }
 }

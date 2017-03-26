@@ -10,6 +10,7 @@
     <string name="ttl_historical_events">Historical Events</string>
     <string name="ttl_basic_information">Basic Information</string>
     <string name="ttl_feature_description">Feature Description</string>
+    <string name="ttl_architectural_information">Architectural Information</string>
 
     <!-- Facts Elements -->
     <string name="poi_name">Name</string>

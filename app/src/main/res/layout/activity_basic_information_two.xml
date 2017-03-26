@@ -35,38 +35,6 @@
 
 
                 <android.support.v7.widget.AppCompatTextView
-                        android:text="@string/poi_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textViewPoiName"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:layout_marginTop="20dp"
-                        android:textSize="13sp"
-                        android:textColor="@color/secondary_text"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"/>
-
-                <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/materialEditTextDescription"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:textSize="16sp"
-                        android:gravity="top"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_baseColor="@color/colorAccent"
-                        app:met_textColor="@color/primary_text"
-                        app:met_underlineColor="@color/colorAccent"
-                        style="@style/MyEditTextTheme"
-                        android:minLines="3"
-                        android:inputType="textMultiLine"
-                        android:nextFocusUp="@id/materialEditTextDescription"
-                        android:nextFocusLeft="@id/materialEditTextDescription"/>
-
-
-                <android.support.v7.widget.AppCompatTextView
                         android:text="@string/poi_built_in"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -77,20 +45,45 @@
                         android:textSize="13sp"
                         android:textColor="@color/secondary_text"/>
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/materialEditTextBuiltIn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:textSize="16sp"
-                        android:gravity="top"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_baseColor="@color/colorAccent"
-                        app:met_textColor="@color/primary_text"
-                        app:met_underlineColor="@color/colorAccent"
-                        style="@style/MyEditTextTheme"
-                        android:inputType="number"/>
+                <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+                        <!--android:id="@+id/materialEditTextBuiltIn"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginStart="25dp"-->
+                        <!--android:layout_marginEnd="25dp"-->
+                        <!--android:textSize="16sp"-->
+                        <!--android:gravity="top"-->
+                        <!--app:met_primaryColor="@color/colorPrimary"-->
+                        <!--app:met_baseColor="@color/colorAccent"-->
+                        <!--app:met_textColor="@color/primary_text"-->
+                        <!--app:met_underlineColor="@color/colorAccent"-->
+                        <!--style="@style/MyEditTextTheme"-->
+                        <!--android:inputType="number"/>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp">
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerBuiltIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:ms_thickness="1dp"
+                    app:ms_baseColor="@color/colorAccent"
+                    app:ms_highlightColor="@color/colorPrimary"
+                    android:layout_weight="6"/>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_add_circle_outline_black_24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
 
 
                 <android.support.v7.widget.AppCompatTextView
@@ -104,20 +97,30 @@
                         android:textSize="13sp"
                         android:textColor="@color/secondary_text"/>
 
-                <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/materialEditTextBuiltBy"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:textSize="16sp"
-                        android:gravity="top"
-                        app:met_primaryColor="@color/colorPrimary"
-                        app:met_baseColor="@color/colorAccent"
-                        app:met_textColor="@color/primary_text"
-                        app:met_underlineColor="@color/colorAccent"
-                        style="@style/MyEditTextTheme"
-                        android:inputType="number"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp">
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerBuiltBy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:ms_thickness="1dp"
+                    app:ms_baseColor="@color/colorAccent"
+                    app:ms_highlightColor="@color/colorPrimary"
+                    android:layout_weight="6"/>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_add_circle_outline_black_24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
 
             <android.support.v7.widget.AppCompatTextView
                     android:text="@string/poi_architect"
@@ -130,20 +133,30 @@
                     android:textSize="13sp"
                     android:textColor="@color/secondary_text"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/materialEditTextArchitect"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp">
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:textSize="16sp"
-                    android:gravity="top"
-                    app:met_primaryColor="@color/colorPrimary"
-                    app:met_baseColor="@color/colorAccent"
-                    app:met_textColor="@color/primary_text"
-                    app:met_underlineColor="@color/colorAccent"
-                    style="@style/MyEditTextTheme"
-                    android:inputType="text"/>
+                    app:ms_thickness="1dp"
+                    app:ms_baseColor="@color/colorAccent"
+                    app:ms_highlightColor="@color/colorPrimary"
+                    android:layout_weight="6"/>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_add_circle_outline_black_24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
