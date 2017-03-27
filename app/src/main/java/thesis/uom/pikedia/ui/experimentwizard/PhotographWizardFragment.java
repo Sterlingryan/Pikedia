@@ -35,11 +35,11 @@ public class PhotographWizardFragment extends Fragment {
         return rootView;
     }
 
-            public void initializeScreen(View rootView){
-                ImageView mMainImage = (ImageView) rootView.findViewById(R.id.mainImageView);
-                mMainImage.setImageResource(R.drawable.profporter_logo_white_background);
+        public void initializeScreen(View rootView){
+            ImageView mMainImage = (ImageView) rootView.findViewById(R.id.mainImageView);
+            mMainImage.setImageResource(R.drawable.ic_photo_camera_white_48dp);
 
-                TextView mWizardText = (TextView) rootView.findViewById(R.id.mainTextView);
-                mWizardText.setText(R.string.expwzd_welcome);
-            }
+            TextView mWizardText = (TextView) rootView.findViewById(R.id.mainTextView);
+            mWizardText.setText(R.string.expwzd_photograph);
+        }
 }

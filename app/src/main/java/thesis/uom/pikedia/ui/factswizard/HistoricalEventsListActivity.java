@@ -49,7 +49,6 @@ public class HistoricalEventsListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
 }
