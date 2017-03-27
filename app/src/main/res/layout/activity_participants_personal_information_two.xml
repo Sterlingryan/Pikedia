@@ -33,6 +33,33 @@
                 android:background="@color/cardview_light_background"
                 android:layout_below="@+id/app_bar">
 
+            <android.support.v7.widget.AppCompatTextView
+                    android:text="@string/prt_course"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewCourse"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/secondary_text"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/materialEditTextCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:textSize="16sp"
+                    android:gravity="top"
+                    app:met_helperText="@string/prt_course"
+                    app:met_primaryColor="@color/colorPrimary"
+                    app:met_baseColor="@color/colorAccent"
+                    app:met_textColor="@color/primary_text"
+                    app:met_underlineColor="@color/colorAccent"
+                    style="@style/MyEditTextTheme"
+                    android:inputType="textAutoComplete"/>
+
 
             <android.support.v7.widget.AppCompatTextView
                     android:text="@string/prt_location"
@@ -51,9 +78,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_thickness="1dp"
                     app:ms_baseColor="@color/colorAccent"
-                    app:ms_highlightColor="@color/colorPrimary"/>
+                    app:ms_highlightColor="@color/colorPrimary"
+                    android:isScrollContainer="true"/>
 
 
             <android.support.v7.widget.AppCompatTextView
@@ -73,7 +100,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_thickness="1dp"
                     app:ms_baseColor="@color/colorAccent"
                     app:ms_highlightColor="@color/colorPrimary"/>
 
@@ -94,7 +120,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_thickness="1dp"
                     app:ms_baseColor="@color/colorAccent"
                     app:ms_highlightColor="@color/colorPrimary"/>
         </LinearLayout>

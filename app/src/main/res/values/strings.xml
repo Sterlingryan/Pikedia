@@ -30,7 +30,9 @@
     <string name="prt_age">Age</string>
     <string name="prt_location">Location</string>
     <string name="prt_smartphone_ownership_os">Smartphone Ownership OS</string>
-    <string name="prt_smartphone_years">Smartphone Ownership Years</string>
+    <string name="prt_smartphone_years">Smartphone Years of Ownership</string>
+    <string name="prt_employment">Current Employment</string>
+    <string name="prt_course">Current Course</string>
 
     <!-- Experiment Wizard Texts -->
     <string name="expwzd_photograph">Step 1: Face your smartphone to the front of the point of interest when taking the photograph</string>
