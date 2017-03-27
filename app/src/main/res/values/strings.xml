@@ -33,9 +33,10 @@
     <string name="prt_smartphone_years">Smartphone Ownership Years</string>
 
     <!-- Experiment Wizard Texts -->
-    <string name="expwzd_photograph">Step 1: Face your smartphone to the front of the point of interest when taking the photograph</string>
-    <string name="expwzd_experiment">Step 2: Answer questions about the point of interest</string>
-    <string name="expwzd_feedback">Step 3: Provide feedback on the experiment</string>
+    <string name="expwzd_welcome">Welcome to "Crowdsourcing of Information on Points of Interest" experiment using Pikedia</string>
+    <string name="expwzd_brief_experiment_description">This experiment is being conducted to gather information on buildings or objects that are of interest.The information that you give in the study will be handled confidentially. Your data will be anonymous which means that your name will not be collected or linked to the data.
+</string>
+    <string name="expwzd_start_experiment">Kindly, tap on the bottom arrow to start the experiment</string>
 
 
 
