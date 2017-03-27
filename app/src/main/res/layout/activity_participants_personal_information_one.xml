@@ -51,7 +51,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_thickness="1dp"
                     app:ms_baseColor="@color/colorAccent"
                     app:ms_highlightColor="@color/colorPrimary"/>
 
@@ -73,7 +72,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_thickness="1dp"
+                    app:ms_baseColor="@color/colorAccent"
+                    app:ms_highlightColor="@color/colorPrimary"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:text="@string/prt_employment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewEmployment"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/secondary_text"/>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerEmployment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
                     app:ms_baseColor="@color/colorAccent"
                     app:ms_highlightColor="@color/colorPrimary"/>
         </LinearLayout>
