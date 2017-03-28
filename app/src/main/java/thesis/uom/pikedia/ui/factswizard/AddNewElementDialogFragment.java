@@ -26,6 +26,10 @@ import thesis.uom.pikedia.utils.Constants;
 
 public class AddNewElementDialogFragment extends DialogFragment {
     EditText mEditTextListName;
+    String mTitle;
+    String mName;
+    String mAttribute;
+
     private DatabaseReference mCaseStudiesDatabase;
 
 
@@ -33,9 +37,12 @@ public class AddNewElementDialogFragment extends DialogFragment {
      * Public static constructor that creates fragment and
      * passes a bundle with data into it when adapter is created
      */
-    public static AddNewElementDialogFragment newInstance() {
+    public static AddNewElementDialogFragment newInstance(String title, String name, String attribute) {
         AddNewElementDialogFragment addNewElementDialogFragment = new AddNewElementDialogFragment();
         Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putString("name", name);
+        bundle.putString("attribute", attribute);
         addNewElementDialogFragment.setArguments(bundle);
         return addNewElementDialogFragment;
     }
@@ -46,6 +53,9 @@ public class AddNewElementDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mTitle = getArguments().getString("title");
+        mName = getArguments().getString("name");
+        mAttribute = getArguments().getString("attribute");
     }
 
     /**
@@ -61,7 +71,7 @@ public class AddNewElementDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomTheme_Dialog);
-        builder.setTitle(R.string.diafrg_add_case_study);
+        builder.setTitle(mTitle);
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View rootView = inflater.inflate(R.layout.dialogue_add_element, null);
