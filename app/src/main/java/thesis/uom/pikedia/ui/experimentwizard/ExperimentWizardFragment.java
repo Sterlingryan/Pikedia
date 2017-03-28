@@ -40,6 +40,6 @@ public class ExperimentWizardFragment extends Fragment {
         mMainImage.setImageResource(R.drawable.ic_photo_camera_white_48dp);
 
         TextView mWizardText = (TextView) rootView.findViewById(R.id.mainTextView);
-        mWizardText.setText(R.string.expwzd_experiment);
+        mWizardText.setText(R.string.expwzd_brief_experiment_description);
     }
 }

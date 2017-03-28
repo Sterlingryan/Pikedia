@@ -74,8 +74,8 @@ public class ParticipantsBasicInformationTwo extends AppCompatActivity {
                 "Gudja","Gzira","Hamrun","Iklin","Imdina","Imgarr","Imqabba","Imsida","Imtarfa","Isla","Kalkara","Kercem","Kirkop","Lija","Luqa","Marsa","Marsaskala","Marsaxlokk","Mellieha","Mosta"
                 ,"Munxar","Nadur","Naxxar","Paola","Pembroke","Pieta","Qala","Qormi","Qrendi","Rabat","Rabat","Safi","San Gwann","San Giljan","San Lawrenz","Saint Lucia","Saint Paul/'s Bay","Saint Venera"
                 ,"Sannat","Siggiewi","Sliema","Swieqi","Tarxien","Ta/' Xbiex","Valletta","Xaghra","Xewkija","Xghajra","Zabbar","Zebbug","Zejtun","Zurrieq"};
-        String[] smartphoneOS = {"Android", "Apple","Windows Mobile","Other","Do not own","35-40", "40+"};
-        String[] smartphoneOwnershipYears = {">3 years", "2 years","1 year","<1 year","none"};
+        String[] smartphoneOS = {"Android", "Apple","Windows Mobile","Other","Do not own"};
+        String[] smartphoneOwnershipYears = {"> 3 years", "2 years","1 year","< 1 year","none"};
 
         ArrayAdapter<String> locationSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locations);
         ArrayAdapter<String> smarthPhoneOsSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, smartphoneOS);

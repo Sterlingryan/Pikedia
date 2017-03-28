@@ -40,6 +40,6 @@ public class FeedbackWizardFragment extends Fragment {
         mMainImage.setImageResource(R.drawable.ic_photo_camera_white_48dp);
 
         TextView mWizardText = (TextView) rootView.findViewById(R.id.mainTextView);
-        mWizardText.setText(R.string.expwzd_feedback);
+        mWizardText.setText(R.string.expwzd_start_experiment);
     }
 }

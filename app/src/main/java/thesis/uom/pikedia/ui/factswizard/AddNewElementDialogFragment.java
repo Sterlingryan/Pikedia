@@ -1,5 +1,9 @@
 package thesis.uom.pikedia.ui.factswizard;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
@@ -14,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.utils.Constants;
 
 /**
  * Created by ryana on 3/26/2017.
@@ -21,6 +26,8 @@ import thesis.uom.pikedia.R;
 
 public class AddNewElementDialogFragment extends DialogFragment {
     EditText mEditTextListName;
+    private DatabaseReference mCaseStudiesDatabase;
+
 
     /**
      * Public static constructor that creates fragment and
@@ -54,14 +61,13 @@ public class AddNewElementDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomTheme_Dialog);
+        builder.setTitle(R.string.diafrg_add_case_study);
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View rootView = inflater.inflate(R.layout.dialogue_add_element, null);
         mEditTextListName = (EditText) rootView.findViewById(R.id.edittextElement);
 
-        /**
-         * Call addShoppingList() when user taps "Done" keyboard action
-         */
+
         mEditTextListName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -90,5 +96,8 @@ public class AddNewElementDialogFragment extends DialogFragment {
      * Add new active list
      */
     public void addElement() {
+        String caseStudyName = mEditTextListName.getText().toString();
+        mCaseStudiesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CASE_STUDIES_NAMES_LIST);
+        mCaseStudiesDatabase.push().child("name").setValue(caseStudyName);
     }
 }

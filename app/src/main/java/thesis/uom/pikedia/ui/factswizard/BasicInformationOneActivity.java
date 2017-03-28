@@ -1,5 +1,11 @@
 package thesis.uom.pikedia.ui.factswizard;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,12 +15,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.utils.Constants;
 
 /**
  * Created by SterlingRyan on 3/19/2017.
@@ -24,28 +36,46 @@ public class BasicInformationOneActivity extends AppCompatActivity{
 
     private LinearLayout mNextButton;
     private ImageView mBackButton;
+    private ArrayList<String> mNamesList;
+    private MaterialSpinner mNamesSpinner;
+    private DatabaseReference mCaseStudiesDatabase;
+    private ImageButton mAddNameButton;
+    private ArrayAdapter<String> mNamesAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_information_one);
 
-        /* Set activity title */
+        initialization();
+        retreiveData();
+    }
+
+
+    private void showAddListDialog() {
+        /* Create an instance of the dialog fragment and show it */
+        DialogFragment dialog = AddNewElementDialogFragment.newInstance();
+        dialog.show(BasicInformationOneActivity.this.getFragmentManager(), "AddListDialogFragment");
+    }
+
+    private void initialization(){
+
+        /* Initialize view */
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        mNamesSpinner= (MaterialSpinner) findViewById(R.id.spinnerName);
+        mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
+        mBackButton = (ImageView) findViewById(R.id.backBtn);
+        mAddNameButton = (ImageButton) findViewById(R.id.addNameImageButton);
+
         toolbar.setTitle(R.string.ttl_structure_information);
         toolbar.setTitleTextColor(Color.WHITE);
 
-        String[] ITEMS = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        /* Initialize view functions*/
+        mNamesList = new ArrayList<>();
+        mNamesAdapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mNamesList);
+        mNamesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mNamesSpinner.setAdapter(mNamesAdapter);
 
-        MaterialSpinner spinner = (MaterialSpinner) findViewById(R.id.spinnerTypeOfArchitecture);
-        spinner.setAdapter(adapter);
-
-        MaterialSpinner spinner2 = (MaterialSpinner) findViewById(R.id.spinnerArtisticStyle);
-        spinner2.setAdapter(adapter);
-
-        mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,18 +84,39 @@ public class BasicInformationOneActivity extends AppCompatActivity{
             }
         });
 
-        mBackButton = (ImageView) findViewById(R.id.backBtn);
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        mAddNameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddListDialog();
+            }
+        });
     }
 
-    public void showAddListDialog(View view) {
-        /* Create an instance of the dialog fragment and show it */
-        DialogFragment dialog = AddNewElementDialogFragment.newInstance();
-        dialog.show(BasicInformationOneActivity.this.getFragmentManager(), "AddListDialogFragment");
+    private void retreiveData(){
+        mCaseStudiesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CASE_STUDIES_NAMES_LIST);
+        mCaseStudiesDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mNamesAdapter.clear();
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+                    HashMap<String,String> name = (HashMap<String,String>)child.getValue();
+                    mNamesList.add(name.get("name"));
+                    mNamesSpinner.setAdapter(mNamesAdapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(),"Error retreiving data " + databaseError.toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
