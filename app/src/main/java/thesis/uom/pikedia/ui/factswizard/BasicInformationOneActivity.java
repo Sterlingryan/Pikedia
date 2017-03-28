@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,10 +38,14 @@ public class BasicInformationOneActivity extends AppCompatActivity{
     private LinearLayout mNextButton;
     private ImageView mBackButton;
     private ArrayList<String> mNamesList;
+    private ArrayList<String> mTypeOfArchitectureList;
     private MaterialSpinner mNamesSpinner;
+    private MaterialSpinner mTypeOfArchitectureSpinner;
     private DatabaseReference mCaseStudiesDatabase;
     private ImageButton mAddNameButton;
+    private ImageButton mAddTypeOfArchitectureButton;
     private ArrayAdapter<String> mNamesAdapter;
+    private ArrayAdapter<String> mTypeOfArchitectureAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +53,7 @@ public class BasicInformationOneActivity extends AppCompatActivity{
         setContentView(R.layout.activity_basic_information_one);
 
         initialization();
-        retreiveData();
+        retrieveData();
     }
 
 
@@ -63,18 +68,25 @@ public class BasicInformationOneActivity extends AppCompatActivity{
         /* Initialize view */
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         mNamesSpinner= (MaterialSpinner) findViewById(R.id.spinnerName);
+        mTypeOfArchitectureSpinner = (MaterialSpinner) findViewById(R.id.spinnerTypeOfArchitecture);
+        mTypeOfArchitectureSpinner = (MaterialSpinner) findViewById(R.id.spinnerTypeOfArchitecture);
         mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
         mBackButton = (ImageView) findViewById(R.id.backBtn);
         mAddNameButton = (ImageButton) findViewById(R.id.addNameImageButton);
+        mAddTypeOfArchitectureButton = (ImageButton) findViewById(R.id.addTypeOfArchitectureImageButton);
 
         toolbar.setTitle(R.string.ttl_structure_information);
         toolbar.setTitleTextColor(Color.WHITE);
 
         /* Initialize view functions*/
         mNamesList = new ArrayList<>();
+        mTypeOfArchitectureList= new ArrayList<>();
         mNamesAdapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mNamesList);
+        mTypeOfArchitectureAdapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mTypeOfArchitectureList);
         mNamesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mTypeOfArchitectureAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mNamesSpinner.setAdapter(mNamesAdapter);
+        mTypeOfArchitectureSpinner.setAdapter(mTypeOfArchitectureAdapter);
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,9 +109,22 @@ public class BasicInformationOneActivity extends AppCompatActivity{
                 showAddListDialog();
             }
         });
+
+        /* Set spinner dropdown top at the foot of the its view*/
+        ViewTreeObserver vto = mNamesSpinner.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mNamesSpinner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int measurement = mNamesSpinner.getMeasuredHeight() - 10;
+                mGenderSpinner.setDropDownVerticalOffset(measurement);
+                mAgeSpinner.setDropDownVerticalOffset(measurement);
+                mEmploymentSpinner.setDropDownVerticalOffset(measurement);
+            }
+        });
     }
 
-    private void retreiveData(){
+    private void retrieveData(){
         mCaseStudiesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CASE_STUDIES_NAMES_LIST);
         mCaseStudiesDatabase.addValueEventListener(new ValueEventListener() {
             @Override
