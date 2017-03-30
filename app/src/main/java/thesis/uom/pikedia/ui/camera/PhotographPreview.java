@@ -14,6 +14,7 @@ import java.io.File;
 
 import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.ui.factswizard.BasicInformationOneActivity;
+import thesis.uom.pikedia.utils.Constants;
 
 /**
  * Created by SterlingRyan on 3/23/2017.
@@ -41,6 +42,7 @@ public class PhotographPreview extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BasicInformationOneActivity.class);
+                intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
                 startActivity(intent);
             }
         });

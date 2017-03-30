@@ -33,38 +33,22 @@
                 android:background="@color/cardview_light_background"
                 android:layout_below="@+id/app_bar">
 
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/prt_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewGender"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"/>
-
             <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_baseColor="@color/colorAccent"
-                    app:ms_highlightColor="@color/colorPrimary"/>
-
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/prt_age"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewAge"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"/>
+                    app:ms_highlightColor="@color/colorPrimary"
+                    app:ms_baseColor="@color/line"
+                    app:ms_hintColor="@color/secondary_text"
+                    app:ms_floatingLabelColor="@color/secondary_text"
+                    android:isScrollContainer="true"
+                    app:ms_enableFloatingLabel="true"
+                    app:ms_hint="@string/prt_gender"
+                    app:ms_floatingLabelText="@string/prt_gender"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"/>
 
             <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerAge"
@@ -72,19 +56,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_baseColor="@color/colorAccent"
-                    app:ms_highlightColor="@color/colorPrimary"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/prt_employment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewEmployment"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"/>
+                    app:ms_highlightColor="@color/colorPrimary"
+                    app:ms_baseColor="@color/line"
+                    app:ms_hintColor="@color/secondary_text"
+                    app:ms_floatingLabelColor="@color/secondary_text"
+                    android:isScrollContainer="true"
+                    app:ms_enableFloatingLabel="true"
+                    app:ms_hint="@string/prt_age"
+                    app:ms_floatingLabelText="@string/prt_age"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"/>
 
             <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerEmployment"
@@ -92,8 +73,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
-                    app:ms_baseColor="@color/colorAccent"
-                    app:ms_highlightColor="@color/colorPrimary"/>
+                    app:ms_highlightColor="@color/colorPrimary"
+                    app:ms_baseColor="@color/line"
+                    app:ms_hintColor="@color/secondary_text"
+                    app:ms_floatingLabelColor="@color/secondary_text"
+                    android:isScrollContainer="true"
+                    app:ms_enableFloatingLabel="true"
+                    app:ms_hint="@string/prt_employment"
+                    app:ms_floatingLabelText="@string/prt_employment"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"/>
         </LinearLayout>
     </LinearLayout>
 

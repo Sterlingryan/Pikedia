@@ -62,6 +62,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.utils.Constants;
 
 /**
  * Created by SterlingRyan on 3/23/2017.
@@ -112,6 +113,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     }
                     Intent intent = new Intent(getApplicationContext(), PhotographPreview.class);
                     intent.putExtra("imagepath", mFile.getAbsolutePath());
+                    intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
                     startActivity(intent);
 
                 }

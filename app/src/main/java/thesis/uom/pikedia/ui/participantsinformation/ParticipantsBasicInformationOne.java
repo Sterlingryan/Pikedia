@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.utils.Constants;
 
 /**
  * Created by SterlingRyan on 3/21/2017.
@@ -68,6 +69,9 @@ public class ParticipantsBasicInformationOne extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent(getApplicationContext(), ParticipantsBasicInformationTwo.class);
+                intent.putExtra(Constants.PARTICIPANT_GENDER_KEY, mGenderSpinner.getSelectedItem().toString());
+                intent.putExtra(Constants.PARTICIPANT_AGE_KEY, mAgeSpinner.getSelectedItem().toString());
+                intent.putExtra(Constants.PARTICIPANT_EMPLOYMENT_KEY, mEmploymentSpinner.getSelectedItem().toString());
                 intent.putExtra("isStudent", isStudent);
                 startActivity(intent);
             }

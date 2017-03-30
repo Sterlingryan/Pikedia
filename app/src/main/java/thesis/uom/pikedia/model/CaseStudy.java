@@ -1,133 +1,188 @@
 package thesis.uom.pikedia.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  * Created by ryana on 3/27/2017.
  */
 
-public class CaseStudy {
+public class CaseStudy implements Serializable{
 
-    private HashMap<String,String> names;
-    private HashMap<String,String> typesOfArchitecture;
-    private HashMap<String,String> artisticStyle;
-    private HashMap<String,String> builtBy;
-    private HashMap<String,String> builtIn;
-    private HashMap<String,String> architect;
-    private HashMap<String,Float> longitude;
-    private HashMap<String,Float> latitude;
-    private HashMap<String,String> historicalEvents;
-    private HashMap<String,String> imageGUID;
-    private HashMap<String,String> religion;
+    private String participantID;
+    private String typesOfArchitecture;
+    private String artisticStyle;
+    private String builtBy;
+    private String builtIn;
+    private String architect;
+    private String longitude;
+    private String latitude;
+    private String historicalEvents;
+    private String imageGUID;
+    private String religion;
     private HashMap<String,String> materials;
-    private HashMap<String,String> purpose;
-    private HashMap<String,String> languageOf;
-    private HashMap<String,String> openingTimes;
-    private HashMap<String,String> entranceFees;
+    private String purpose;
+    private String languageOf;
+    private String openingTimes;
+    private String entranceFees;
     private HashMap<String,String> services;
+    private String depiction;
     private HashMap<String,String> colors;
-    private HashMap<String,Object> timestampCreated;
 
 
     /* Empty Constructor for Firebase */
     public CaseStudy() {
     }
 
-    public CaseStudy(HashMap<String, String> names, HashMap<String, String> typesOfArchitecture, HashMap<String, String> artisticStyle, HashMap<String, String> builtBy, HashMap<String, String> builtIn, HashMap<String, String> architect, HashMap<String, Float> longitude, HashMap<String, Float> latitude, HashMap<String, String> historicalEvents, HashMap<String, String> imageGUID, HashMap<String, String> religion, HashMap<String, String> materials, HashMap<String, String> purpose, HashMap<String, String> languageOf, HashMap<String, String> openingTimes, HashMap<String, String> entranceFees, HashMap<String, String> services, HashMap<String, String> colors, HashMap<String, Object> timestampCreated) {
-        this.names = names;
-        this.typesOfArchitecture = typesOfArchitecture;
-        this.artisticStyle = artisticStyle;
-        this.builtBy = builtBy;
-        this.builtIn = builtIn;
-        this.architect = architect;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.historicalEvents = historicalEvents;
-        this.imageGUID = imageGUID;
-        this.religion = religion;
-        this.materials = materials;
-        this.purpose = purpose;
-        this.languageOf = languageOf;
-        this.openingTimes = openingTimes;
-        this.entranceFees = entranceFees;
-        this.services = services;
-        this.colors = colors;
-        this.timestampCreated = timestampCreated;
+    public String getParticipantID() {
+        return participantID;
     }
 
-    public HashMap<String, String> getNames() {
-        return names;
+    public void setParticipantID(String participantID) {
+        this.participantID = participantID;
     }
 
-    public HashMap<String, String> getTypesOfArchitecture() {
+    public String getTypesOfArchitecture() {
         return typesOfArchitecture;
     }
 
-    public HashMap<String, String> getArtisticStyle() {
+    public void setTypesOfArchitecture(String typesOfArchitecture) {
+        this.typesOfArchitecture = typesOfArchitecture;
+    }
+
+    public String getArtisticStyle() {
         return artisticStyle;
     }
 
-    public HashMap<String, String> getBuiltBy() {
+    public void setArtisticStyle(String artisticStyle) {
+        this.artisticStyle = artisticStyle;
+    }
+
+    public String getBuiltBy() {
         return builtBy;
     }
 
-    public HashMap<String, String> getBuiltIn() {
+    public void setBuiltBy(String builtBy) {
+        this.builtBy = builtBy;
+    }
+
+    public String getBuiltIn() {
         return builtIn;
     }
 
-    public HashMap<String, String> getArchitect() {
+    public void setBuiltIn(String builtIn) {
+        this.builtIn = builtIn;
+    }
+
+    public String getArchitect() {
         return architect;
     }
 
-    public HashMap<String, Float> getLongitude() {
+    public void setArchitect(String architect) {
+        this.architect = architect;
+    }
+
+    public String getLongitude() {
         return longitude;
     }
 
-    public HashMap<String, Float> getLatitude() {
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
         return latitude;
     }
 
-    public HashMap<String, String> getHistoricalEvents() {
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getHistoricalEvents() {
         return historicalEvents;
     }
 
-    public HashMap<String, String> getImageGUID() {
+    public void setHistoricalEvents(String historicalEvents) {
+        this.historicalEvents = historicalEvents;
+    }
+
+    public String getImageGUID() {
         return imageGUID;
     }
 
-    public HashMap<String, String> getReligion() {
+    public void setImageGUID(String imageGUID) {
+        this.imageGUID = imageGUID;
+    }
+
+    public String getReligion() {
         return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
     }
 
     public HashMap<String, String> getMaterials() {
         return materials;
     }
 
-    public HashMap<String, String> getPurpose() {
+    public void setMaterials(HashMap<String, String> materials) {
+        this.materials = materials;
+    }
+
+    public String getPurpose() {
         return purpose;
     }
 
-    public HashMap<String, String> getLanguageOf() {
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getLanguageOf() {
         return languageOf;
     }
 
-    public HashMap<String, String> getOpeningTimes() {
+    public void setLanguageOf(String languageOf) {
+        this.languageOf = languageOf;
+    }
+
+    public String getOpeningTimes() {
         return openingTimes;
     }
 
-    public HashMap<String, String> getEntranceFees() {
+    public void setOpeningTimes(String openingTimes) {
+        this.openingTimes = openingTimes;
+    }
+
+    public String getEntranceFees() {
         return entranceFees;
+    }
+
+    public void setEntranceFees(String entranceFees) {
+        this.entranceFees = entranceFees;
     }
 
     public HashMap<String, String> getServices() {
         return services;
     }
 
+    public void setServices(HashMap<String, String> services) {
+        this.services = services;
+    }
+
     public HashMap<String, String> getColors() {
         return colors;
     }
 
-    public HashMap<String, Object> getTimestampCreated() {
-        return timestampCreated;
+    public void setColors(HashMap<String, String> colors) {
+        this.colors = colors;
+    }
+
+    public String getDepiction() {
+        return depiction;
+    }
+
+    public void setDepiction(String depiction) {
+        this.depiction = depiction;
     }
 }

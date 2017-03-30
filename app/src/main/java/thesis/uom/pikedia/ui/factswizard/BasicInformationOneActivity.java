@@ -1,6 +1,6 @@
 package thesis.uom.pikedia.ui.factswizard;
 
-import com.google.android.gms.vision.text.Line;
+import com.google.firebase.appindexing.FirebaseAppIndex;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,23 +12,33 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.github.jorgecastilloprz.FABProgressCircle;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.model.CaseStudy;
 import thesis.uom.pikedia.utils.Constants;
 
 /**
@@ -37,24 +47,25 @@ import thesis.uom.pikedia.utils.Constants;
 
 public class BasicInformationOneActivity extends AppCompatActivity{
 
-    private LinearLayout mNextButton;
-    private ImageView mBackButton;
     private DatabaseReference mCaseStudiesDatabase;
-    private ArrayList<String> mNamesList;
-    private ArrayList<String> mTypeOfArchitectureList;
     private ArrayList<String> mArtisticStyleList;
     private MaterialSpinner mNamesSpinner;
     private MaterialSpinner mTypeOfArchitectureSpinner;
     private MaterialSpinner mArtisticStyleSpinner;
-    private ImageButton mAddNameButton;
-    private ImageButton mAddTypeOfArchitectureButton;
-    private ImageButton mAddArtisticStyleButton;
+//    private TextView mArchitectureTypeTextView;
+//    private TextView mArtisticStyleTextView;
+    private ImageView mAddArtisticStyleButton;
     private ArrayAdapter<String> mNamesAdapter;
     private ArrayAdapter<String> mTypeOfArchitectureAdapter;
     private ArrayAdapter<String> mArtisticStyleAdapter;
+    private String[] artisticStyle = {"Baroque", "Modern", "Gothic", "Medieval"};
 
     private LinearLayout mTypeOfArchitectureLayout;
     private LinearLayout mArtisticStyleLayout;
+    private ProgressBar mProgressBar;
+
+    public CaseStudy mCaseStudy = new CaseStudy();
+    public String mParticipantID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,17 +73,20 @@ public class BasicInformationOneActivity extends AppCompatActivity{
         setContentView(R.layout.activity_basic_information_one);
 
         initialization();
-        retrieveData();
     }
 
 
-    private void showAddListDialog() {
+    private void showAddAttributeDialog(String title, String caseStudyName, String attribute) {
         /* Create an instance of the dialog fragment and show it */
-        DialogFragment dialog = AddNewElementDialogFragment.newInstance("Add Name", "", "");
-        dialog.show(BasicInformationOneActivity.this.getFragmentManager(), "AddListDialogFragment");
+        DialogFragment dialog = AddNewElementDialogFragment.newInstance(title, caseStudyName, attribute, mParticipantID);
+        dialog.show(getFragmentManager(), "AddAttributeDialogFragment");
     }
 
     private void initialization(){
+
+        mParticipantID = getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY);
+        String[] caseStudies = {"Christ The King Statue", "Valletta City Gate", "New Parliament Building", "Pjazza Teatru Rjal", "Saint John's Co-Cathedral"};
+        String[] architectureTypes = {"Statue", "Gate", "University", "Theatre", "Parliament", "Cathedral"};
 
         /* Initialize view */
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -83,23 +97,19 @@ public class BasicInformationOneActivity extends AppCompatActivity{
         mArtisticStyleSpinner = (MaterialSpinner) findViewById(R.id.spinnerArtisticStyle);
         mArtisticStyleLayout = (LinearLayout) findViewById(R.id.linearLayoutArtisticStyle);
         mArtisticStyleLayout.setVisibility(View.GONE);
-        mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
-        mBackButton = (ImageView) findViewById(R.id.backBtn);
-        mAddNameButton = (ImageButton) findViewById(R.id.addNameImageButton);
-        mAddTypeOfArchitectureButton = (ImageButton) findViewById(R.id.addTypeOfArchitectureImageButton);
-        mAddArtisticStyleButton = (ImageButton) findViewById(R.id.addArtisticStyleImageButton);
+        LinearLayout mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
+        mAddArtisticStyleButton = (ImageView) findViewById(R.id.addArtisticStyleImageButton);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
 
         toolbar.setTitle(R.string.ttl_structure_information);
         toolbar.setTitleTextColor(Color.WHITE);
 
         /* Initialize view functions*/
-        mNamesList = new ArrayList<>();
-        mNamesList.add("");
-        mTypeOfArchitectureList= new ArrayList<>();
-        mArtisticStyleList= new ArrayList<>();
+        mArtisticStyleList = new ArrayList<>();
 
-        mNamesAdapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mNamesList);
-        mTypeOfArchitectureAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mTypeOfArchitectureList);
+        mNamesAdapter= new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, caseStudies);
+        mTypeOfArchitectureAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, architectureTypes);
         mArtisticStyleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mArtisticStyleList);
 
         mNamesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,9 +123,10 @@ public class BasicInformationOneActivity extends AppCompatActivity{
         mNamesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0){
+                if(mNamesSpinner.getSelectedItem() != getResources().getString(R.string.poi_name)){
                     mTypeOfArchitectureLayout.setVisibility(View.VISIBLE);
                     mArtisticStyleLayout.setVisibility(View.VISIBLE);
+                    retrieveData();
                 } else {
                     mTypeOfArchitectureLayout.setVisibility(View.GONE);
                     mArtisticStyleLayout.setVisibility(View.GONE);
@@ -131,27 +142,24 @@ public class BasicInformationOneActivity extends AppCompatActivity{
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mNamesSpinner.getSelectedItemPosition() == 0){
+                if(mNamesSpinner.getSelectedItem() == getResources().getString(R.string.poi_name)){
                     Toast.makeText(getApplicationContext(), "Choose a name", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Intent intent = new Intent(getApplicationContext(), BasicInformationTwoActivity.class);
+                    mCaseStudy.setParticipantID(mParticipantID);
+                    mCaseStudy.setArtisticStyle(mArtisticStyleSpinner.getSelectedItem().toString());
+                    mCaseStudy.setTypesOfArchitecture(mTypeOfArchitectureSpinner.getSelectedItem().toString());
+                    intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                     startActivity(intent);
                 }
             }
         });
 
-        mBackButton.setOnClickListener(new View.OnClickListener() {
+        mAddArtisticStyleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-            }
-        });
-
-        mAddNameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddListDialog();
+                showAddAttributeDialog("Add Artistic Style", mNamesSpinner.getSelectedItem().toString(), Constants.CASE_STUDY_ARTISTIC_STYLE);
             }
         });
 
@@ -170,23 +178,26 @@ public class BasicInformationOneActivity extends AppCompatActivity{
     }
 
     private void retrieveData(){
-        mCaseStudiesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CASE_STUDIES_NAMES_LIST);
-        mCaseStudiesDatabase.addValueEventListener(new ValueEventListener() {
+        mCaseStudiesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mNamesSpinner.getSelectedItem().toString());
+        mCaseStudiesDatabase.child(Constants.CASE_STUDY_ARTISTIC_STYLE).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mNamesAdapter.clear();
-                mNamesList.add("");
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-                    HashMap<String,String> name = (HashMap<String,String>)child.getValue();
-                    mNamesList.add(name.get("name"));
-                    mNamesSpinner.setAdapter(mNamesAdapter);
+                mProgressBar.setVisibility(View.VISIBLE);
+                mArtisticStyleAdapter.clear();
+                for(String style: artisticStyle){
+                    mArtisticStyleList.add(style);
                 }
-
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+                    HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
+                    mArtisticStyleList.add(AttributeList.get("element"));
+                    mArtisticStyleSpinner.setAdapter(mArtisticStyleAdapter);
+                }
+                mProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(),"Error retreiving data " + databaseError.toString(),Toast.LENGTH_SHORT).show();
+
             }
         });
     }

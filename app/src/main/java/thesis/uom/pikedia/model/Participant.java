@@ -1,13 +1,17 @@
 package thesis.uom.pikedia.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by ryana on 3/27/2017.
  */
 
-public class Participant {
-    private int participantId;
+public class Participant implements Serializable {
     private String gender;
-    private int age;
+    private String age;
     private String locality;
     private String smartPhoneOwnershipOS;
     private String smartPhoneYearsOfOwnership;
@@ -18,8 +22,7 @@ public class Participant {
     public Participant() {
     }
 
-    public Participant(int participantId, String gender, int age, String locality, String smartPhoneOwnershipOS, String smartPhoneYearsOfOwnership, String employment, String course) {
-        this.participantId = participantId;
+    public Participant( String gender, String age, String locality, String smartPhoneOwnershipOS, String smartPhoneYearsOfOwnership, String employment, String course) {
         this.gender = gender;
         this.age = age;
         this.locality = locality;
@@ -29,15 +32,11 @@ public class Participant {
         this.course = course;
     }
 
-    public int getParticipantId() {
-        return participantId;
-    }
-
     public String getGender() {
         return gender;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
@@ -60,4 +59,5 @@ public class Participant {
     public String getCourse() {
         return course;
     }
+
 }
