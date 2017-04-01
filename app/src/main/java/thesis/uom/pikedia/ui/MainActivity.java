@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import java.util.Timer;
-
 import thesis.uom.pikedia.R;
-import thesis.uom.pikedia.ui.experimentwizard.ExperimentWizardActivity;
+import thesis.uom.pikedia.ui.crowdsourcingmodule.ExperimentWizardActivity;
 
 /**
  * Created by SterlingRyan on 3/23/2017.

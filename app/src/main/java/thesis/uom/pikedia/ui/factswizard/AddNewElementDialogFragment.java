@@ -73,7 +73,8 @@ public class AddNewElementDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomTheme_Dialog);
-        builder.setTitle(mTitle);
+        builder.setTitle(mTitle)
+        ;
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View rootView = inflater.inflate(R.layout.dialogue_add_element, null);
@@ -99,6 +100,11 @@ public class AddNewElementDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         addElement();
                     }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
                 });
 
         return builder.create();
@@ -108,8 +114,12 @@ public class AddNewElementDialogFragment extends DialogFragment {
      * Add new active list
      */
     public void addElement() {
-        String element= mEditTextNewElement.getText().toString();
-        mAttributesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mName).child(mAttribute).child(mParticipant).child("element");
-        mAttributesDatabase.setValue(element);
+        String element = mEditTextNewElement.getText().toString();
+        if (!element.isEmpty()) {
+            mAttributesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mName).child(mAttribute).child(mParticipant).child("element");
+            mAttributesDatabase.setValue(element);
+        }
     }
+
+
 }

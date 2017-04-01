@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,16 +15,13 @@ import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.model.Participant;
-import thesis.uom.pikedia.ui.camera.CameraActivity;
-import thesis.uom.pikedia.ui.experimentwizard.PhotographyTipsActivity;
+import thesis.uom.pikedia.ui.crowdsourcingmodule.PhotographyTipsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
 /**

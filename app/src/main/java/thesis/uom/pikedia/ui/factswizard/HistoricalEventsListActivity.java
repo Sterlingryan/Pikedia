@@ -11,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import thesis.uom.pikedia.R;
-import thesis.uom.pikedia.ui.camera.FeatureCaptureActivity;
-import thesis.uom.pikedia.ui.experimentwizard.FeaturePhotographyTipsActivity;
+import thesis.uom.pikedia.ui.crowdsourcingmodule.FeaturePhotographyTipsActivity;
 
 /**
  * Created by SterlingRyan on 3/21/2017.

@@ -8,15 +8,15 @@
     android:paddingLeft="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ui.factswizard.BasicInformationOneActivity">
+    tools:context=".ui.factswizard.OpenEndedQuestionsActivity">
 
     <EditText
         android:id="@+id/edittextElement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Add new element"
         android:imeOptions="actionDone|flagNoExtractUi"
         android:inputType="textCapWords"
-        android:textColor="#000"
-        android:textColorHint="#f5f5f5" />
+        android:textColor="@color/secondary_text"
+        android:textSize="16sp"
+        style="@style/MyEditTextTheme"/>
 </RelativeLayout>

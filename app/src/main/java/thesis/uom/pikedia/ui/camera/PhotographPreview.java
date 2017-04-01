@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 
 import thesis.uom.pikedia.R;
-import thesis.uom.pikedia.ui.factswizard.BasicInformationOneActivity;
+import thesis.uom.pikedia.ui.factswizard.OpenEndedQuestionsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
 /**
@@ -41,7 +41,7 @@ public class PhotographPreview extends AppCompatActivity {
         mFinishImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BasicInformationOneActivity.class);
+                Intent intent = new Intent(getApplicationContext(), OpenEndedQuestionsActivity.class);
                 intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
                 startActivity(intent);
             }

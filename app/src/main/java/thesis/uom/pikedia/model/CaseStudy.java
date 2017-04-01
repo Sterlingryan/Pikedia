@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class CaseStudy implements Serializable{
 
     private String participantID;
+    private String name;
     private String typesOfArchitecture;
     private String artisticStyle;
     private String builtBy;
@@ -32,6 +33,14 @@ public class CaseStudy implements Serializable{
 
     /* Empty Constructor for Firebase */
     public CaseStudy() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getParticipantID() {

@@ -16,14 +16,16 @@
             android:title="@string/ttl_structure_information"
             android:paddingStart="25dp"
             android:paddingLeft="25dp"
-            android:elevation="5sp"/>
+            android:elevation="5sp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/app_bar"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/linearLayout">
+            android:layout_above="@+id/linearLayout"
+            android:layout_below="@+id/app_bar">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                       android:orientation="vertical"
@@ -31,30 +33,28 @@
                       android:layout_height="wrap_content"
                       android:background="@color/cardview_light_background">
 
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_built_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewBuiltIn"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"/>
-
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginStart="25dp"
-                    >
+                    android:layout_marginStart="25dp">
 
                 <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/spinnerBuiltIn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_built_in"
+                        app:ms_floatingLabelText="@string/poi_built_in"
+                        app:ms_enableErrorLabel="false"
                         app:ms_highlightColor="@color/colorPrimary"
-                        android:layout_weight="6"/>
+                        app:ms_baseColor="@color/line"/>
 
 
                 <android.support.design.widget.FloatingActionButton
@@ -65,23 +65,51 @@
                         android:src="@drawable/ic_add_white_18dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="10dp"
                         app:fabSize="mini"
-                        android:elevation="6dp"/>
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
             </LinearLayout>
 
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_built_by"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewBuiltBy"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"/>
+                    android:orientation="horizontal"
+                    android:layout_marginStart="25dp">
+
+                <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/spinnerTypeOfArchitecture"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_highlightColor="@color/colorPrimary"
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_architecture_type"
+                        app:ms_floatingLabelText="@string/poi_architecture_type"/>
+
+
+                <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/addTypeOfArchitectureImageButton"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:backgroundTint="@color/colorPrimary"
+                        android:src="@drawable/ic_add_white_18dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="10dp"
+                        app:fabSize="mini"
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
+            </LinearLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -93,8 +121,19 @@
                         android:id="@+id/spinnerBuiltBy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
                         app:ms_highlightColor="@color/colorPrimary"
-                        android:layout_weight="6"/>
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_built_by"
+                        app:ms_floatingLabelText="@string/poi_built_by"/>
+
 
                 <android.support.design.widget.FloatingActionButton
                         android:id="@+id/addBuiltByImageButton"
@@ -104,22 +143,12 @@
                         android:src="@drawable/ic_add_white_18dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="10dp"
                         app:fabSize="mini"
-                        android:elevation="6dp"/>
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
             </LinearLayout>
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_architect"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewArchitect"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"/>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -128,11 +157,22 @@
                     android:layout_marginStart="25dp">
 
                 <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinnerName"
+                        android:id="@+id/spinnerArchitect"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
                         app:ms_highlightColor="@color/colorPrimary"
-                        android:layout_weight="6"/>
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_architect"
+                        app:ms_floatingLabelText="@string/poi_architect"/>
+
 
                 <android.support.design.widget.FloatingActionButton
                         android:id="@+id/addArchitectImageButton"
@@ -142,23 +182,12 @@
                         android:src="@drawable/ic_add_white_18dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="10dp"
                         app:fabSize="mini"
-                        android:elevation="6dp"/>
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
             </LinearLayout>
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_religion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewReligion"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"/>
-
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -170,8 +199,18 @@
                         android:id="@+id/spinnerReligion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
                         app:ms_highlightColor="@color/colorPrimary"
-                        android:layout_weight="6"/>
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_religion"
+                        app:ms_floatingLabelText="@string/poi_religion"/>
 
 
                 <android.support.design.widget.FloatingActionButton
@@ -182,54 +221,51 @@
                         android:src="@drawable/ic_add_white_18dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="10dp"
                         app:fabSize="mini"
-                        android:elevation="6dp"/>
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
             </LinearLayout>
 
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_purpose"
+            <LinearLayout
+                    android:id="@+id/linearLayoutArtisticStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewPurpose"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"/>
+                    android:orientation="horizontal"
+                    android:layout_marginStart="25dp">
 
+                <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/spinnerArtisticStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_highlightColor="@color/colorPrimary"
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_artistic_style"
+                        app:ms_floatingLabelText="@string/poi_artistic_style"/>
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/materialEditTextPurpose"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="44dp"
-                    android:textSize="16sp"
-                    android:gravity="top"
-                    app:met_primaryColor="@color/colorPrimary"
-                    app:met_textColor="@color/primary_text"
-                    style="@style/MyEditTextTheme"
-                    android:inputType="text"
-                    android:nextFocusUp="@id/textViewPurpose"
-                    android:nextFocusLeft="@id/textViewPurpose"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_language"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewLanguage"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"/>
-
+                <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/addArtisticStyleImageButton"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:backgroundTint="@color/colorPrimary"
+                        android:src="@drawable/ic_add_white_18dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="10dp"
+                        app:fabSize="mini"
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
+            </LinearLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -241,8 +277,18 @@
                         android:id="@+id/spinnerLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
                         app:ms_highlightColor="@color/colorPrimary"
-                        android:layout_weight="6"/>
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_language"
+                        app:ms_floatingLabelText="@string/poi_language"/>
 
 
                 <android.support.design.widget.FloatingActionButton
@@ -253,25 +299,12 @@
                         android:src="@drawable/ic_add_white_18dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="10dp"
                         app:fabSize="mini"
-                        android:elevation="6dp"/>
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
             </LinearLayout>
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_entrance_fees"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewEnranceFee"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"/>
-
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -283,8 +316,18 @@
                         android:id="@+id/spinnerEntranceFees"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
                         app:ms_highlightColor="@color/colorPrimary"
-                        android:layout_weight="6"/>
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_entrance_fees"
+                        app:ms_floatingLabelText="@string/poi_entrance_fees"/>
 
 
                 <android.support.design.widget.FloatingActionButton
@@ -295,25 +338,12 @@
                         android:src="@drawable/ic_add_white_18dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="10dp"
                         app:fabSize="mini"
-                        android:elevation="6dp"/>
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
             </LinearLayout>
-
-            <android.support.v7.widget.AppCompatTextView
-                    android:text="@string/poi_depiction"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewDepiction"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textSize="13sp"
-                    android:textColor="@color/secondary_text"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"/>
-
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -325,8 +355,18 @@
                         android:id="@+id/spinnerDepiction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        app:ms_enableFloatingLabel="true"
+                        app:ms_enableErrorLabel="false"
                         app:ms_highlightColor="@color/colorPrimary"
-                        android:layout_weight="6"/>
+                        app:ms_baseColor="@color/line"
+                        android:isScrollContainer="true"
+                        android:paddingBottom="16dp"
+                        android:paddingTop="16dp"
+                        app:ms_hintColor="@color/secondary_text"
+                        app:ms_floatingLabelColor="@color/secondary_text"
+                        app:ms_hint="@string/poi_depiction"
+                        app:ms_floatingLabelText="@string/poi_depiction"/>
 
 
                 <android.support.design.widget.FloatingActionButton
@@ -337,10 +377,11 @@
                         android:src="@drawable/ic_add_white_18dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
-                        android:layout_marginRight="7dp"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="10dp"
                         app:fabSize="mini"
-                        android:elevation="6dp"/>
+                        android:elevation="6dp"
+                        app:pressedTranslationZ="12dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

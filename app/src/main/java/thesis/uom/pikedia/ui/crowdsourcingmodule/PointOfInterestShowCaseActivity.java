@@ -1,4 +1,4 @@
-package thesis.uom.pikedia.ui;
+package thesis.uom.pikedia.ui.crowdsourcingmodule;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

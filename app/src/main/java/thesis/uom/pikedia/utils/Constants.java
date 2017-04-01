@@ -23,6 +23,22 @@ public final class Constants {
 
     /* Case Study's Constants */
     public static final String CASE_STUDY = "case_study";
+    public static final String CASE_STUDY_ATTTRIBUTE = "attribute";
+    public static final String CASE_STUDY_DESCRIPTION = "description";
     public static final String CASE_STUDY_ARCHITECTURE_TYPE = "architecture_type";
     public static final String CASE_STUDY_ARTISTIC_STYLE = "architecture_style";
+    public static final String CASE_STUDY_BUILT_BY = "built_by";
+    public static final String CASE_STUDY_BUILT_IN = "built_in";
+    public static final String CASE_STUDY_ARCHITECT = "architect";
+    public static final String CASE_STUDY_HISTORICAL_EVENTS = "historical_events";
+    public static final String CASE_STUDY_RELIGION = "religion";
+    public static final String CASE_STUDY_MATERIALS = "Building Materials";
+    public static final String CASE_STUDY_PURPOSE = "purpose";
+    public static final String CASE_STUDY_LANGUAGES = "Languages";
+    public static final String CASE_STUDY_OPENING_TIMES = "opening_times";
+    public static final String CASE_STUDY_ENTRANCE_FEE = "entrance_fee";
+    public static final String CASE_STUDY_SERVICES = "Services";
+    public static final String CASE_STUDY_DEPICTION = "depiction";
+    public static final String CASE_STUDY_COLORS = "Colors";
+
 }

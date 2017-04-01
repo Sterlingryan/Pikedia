@@ -32,17 +32,6 @@
                         android:orientation="vertical"
                         android:background="@color/cardview_light_background">
 
-                    <!--<android.support.v7.widget.AppCompatTextView-->
-                            <!--android:text="@string/poi_name"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:id="@+id/textViewPoiName"-->
-                            <!--android:layout_marginStart="25dp"-->
-                            <!--android:layout_marginEnd="25dp"-->
-                            <!--android:paddingTop="16dp"-->
-                            <!--android:textSize="12sp"-->
-                            <!--android:textColor="@color/secondary_text"/>-->
-
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -66,45 +55,53 @@
                                 app:ms_floatingLabelColor="@color/secondary_text"
                                 app:ms_hint="@string/poi_name"
                                 app:ms_floatingLabelText="@string/poi_name"/>
-
                     </LinearLayout>
 
-                    <!--<android.support.v7.widget.AppCompatTextView-->
-                            <!--android:text="@string/poi_architecture_type"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:id="@+id/textViewArchitectureType"-->
-                            <!--android:layout_marginStart="25dp"-->
-                            <!--android:layout_marginEnd="25dp"-->
-                            <!--android:paddingTop="16dp"-->
-                            <!--android:textSize="12sp"-->
-                            <!--android:textColor="@color/secondary_text"/>-->
-
-                    <LinearLayout
-                            android:id="@+id/linearLayoutTypeOfArchitecture"
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/materialEditTextDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_marginStart="25dp"
-                            android:layout_marginEnd="25dp">
+                            android:layout_marginEnd="25dp"
+                            android:textSize="16sp"
+                            android:gravity="top"
+                            android:hint="@string/poi_description"
+                            app:met_floatingLabelText="@string/poi_description"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_textColor="@color/primary_text"
+                            app:met_textColorHint="@color/secondary_text"
+                            app:met_baseColor="@color/secondary_text"
+                            app:met_underlineColor="@color/line"
+                            style="@style/MyEditTextTheme"
+                            android:inputType="textMultiLine"
+                            android:nextFocusUp="@id/app_bar"
+                            android:nextFocusLeft="@id/app_bar"
+                            android:paddingTop="16dp"
+                            android:paddingBottom="16dp"/>
 
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                                android:id="@+id/spinnerTypeOfArchitecture"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                app:ms_enableFloatingLabel="true"
-                                app:ms_enableErrorLabel="false"
-                                app:ms_highlightColor="@color/colorPrimary"
-                                app:ms_baseColor="@color/line"
-                                android:isScrollContainer="true"
-                                android:paddingBottom="16dp"
-                                android:paddingTop="16dp"
-                                app:ms_hintColor="@color/secondary_text"
-                                app:ms_floatingLabelColor="@color/secondary_text"
-                                app:ms_hint="@string/poi_architecture_type"
-                                app:ms_floatingLabelText="@string/poi_architecture_type"/>
-                    </LinearLayout>
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/materialEditTextPurpose"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:textSize="16sp"
+                            android:gravity="top"
+                            android:hint="@string/poi_purpose"
+                            app:met_floatingLabelText="@string/poi_purpose"
+                            app:met_floatingLabel="highlight"
+                            app:met_primaryColor="@color/colorPrimary"
+                            app:met_textColor="@color/primary_text"
+                            app:met_textColorHint="@color/secondary_text"
+                            app:met_baseColor="@color/secondary_text"
+                            app:met_underlineColor="@color/line"
+                            style="@style/MyEditTextTheme"
+                            android:inputType="text"
+                            android:nextFocusUp="@id/app_bar"
+                            android:nextFocusLeft="@id/app_bar"
+                            android:paddingTop="16dp"
+                            android:paddingBottom="16dp"/>
 
                     <!--<android.support.v7.widget.AppCompatTextView-->
                             <!--android:text="@string/poi_artistic_style"-->
@@ -116,44 +113,6 @@
                             <!--android:paddingTop="16dp"-->
                             <!--android:textSize="12sp"-->
                             <!--android:textColor="@color/secondary_text"/>-->
-
-                    <LinearLayout
-                            android:id="@+id/linearLayoutArtisticStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginStart="25dp">
-
-                        <fr.ganfra.materialspinner.MaterialSpinner
-                                android:id="@+id/spinnerArtisticStyle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                app:ms_enableFloatingLabel="true"
-                                app:ms_enableErrorLabel="false"
-                                app:ms_highlightColor="@color/colorPrimary"
-                                app:ms_baseColor="@color/line"
-                                android:isScrollContainer="true"
-                                android:paddingBottom="16dp"
-                                android:paddingTop="16dp"
-                                app:ms_hintColor="@color/secondary_text"
-                                app:ms_floatingLabelColor="@color/secondary_text"
-                                app:ms_hint="@string/poi_artistic_style"
-                                app:ms_floatingLabelText="@string/poi_artistic_style"/>
-
-                        <android.support.design.widget.FloatingActionButton
-                                android:id="@+id/addArtisticStyleImageButton"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                app:backgroundTint="@color/colorPrimary"
-                                android:src="@drawable/ic_add_white_18dp"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="7dp"
-                                android:layout_marginRight="25dp"
-                                android:layout_marginBottom="10dp"
-                                app:fabSize="mini"
-                                android:elevation="6dp"/>
-                    </LinearLayout>
                 </LinearLayout>
           <ProgressBar
                   style="@style/Widget.AppCompat.ProgressBar.Horizontal"

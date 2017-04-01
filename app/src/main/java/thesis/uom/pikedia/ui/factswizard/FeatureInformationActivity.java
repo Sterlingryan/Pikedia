@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import thesis.uom.pikedia.R;
-import thesis.uom.pikedia.ui.PointOfInterestShowCaseActivity;
+import thesis.uom.pikedia.ui.crowdsourcingmodule.PointOfInterestShowCaseActivity;
 
 /**
  * Created by SterlingRyan on 3/25/2017.
