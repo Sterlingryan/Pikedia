@@ -114,6 +114,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     Intent intent = new Intent(getApplicationContext(), PhotographPreview.class);
                     intent.putExtra("imagepath", mFile.getAbsolutePath());
                     intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+                    intent.putExtra(Constants.CASE_STUDY, getIntent().getExtras().getString(Constants.CASE_STUDY));
                     startActivity(intent);
 
                 }

@@ -8,6 +8,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +23,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,6 +45,7 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
     private ListView mList;
     private FloatingActionButton mAddAnswerButton;
     private ArrayList<String> mAnswerList;
+    private ArrayList<String> mChosenAnswerList;
     private AnswerAdapter mAnswerAdapter;
 
     private CaseStudy mCaseStudy;
@@ -61,8 +66,11 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
     private void initiate(){
         mList = (ListView) findViewById(R.id.list_view_items);
         mAddAnswerButton = (FloatingActionButton) findViewById(R.id.fab_add_item);
+        LinearLayout mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
+        ImageView mBackButton = (ImageView) findViewById(R.id.backBtn);
 
         mAnswerList = new ArrayList<>();
+        mChosenAnswerList = new ArrayList<>();
         mAnswerAdapter = new AnswerAdapter();
 
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
@@ -79,6 +87,28 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
                 showAddAttributeDialog("Add " + mAttribute,mCaseStudy.getName(), mAttribute);
             }
         });
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, String> hashMap = new HashMap<>();
+                for(int i = 0; i < mChosenAnswerList.size(); i++){
+                    hashMap.put(((Integer) i).toString(),mChosenAnswerList.get(i));
+                }
+                mCaseStudy.setMaterials(hashMap);
+                Intent intent = new Intent(getApplicationContext(), MultipleAnswerQuestionsOneActivity.class);
+                intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+                intent.putExtra(Constants.CASE_STUDY_ATTTRIBUTE, Constants.CASE_STUDY_SERVICES);
+                startActivity(intent);
+            }
+        });
+
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void retrieveData(){
@@ -87,11 +117,12 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mAnswerList.clear();
+                AnswerAdapter answerAdapter = new AnswerAdapter();
                 for(DataSnapshot child: dataSnapshot.getChildren()){
                     HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
                     mAnswerList.add(AttributeList.get("element"));
-                    mAnswerAdapter.notifyDataSetChanged();
                 }
+                mList.setAdapter(answerAdapter);
             }
 
             @Override
@@ -108,6 +139,12 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
     }
 
     private class AnswerAdapter extends BaseAdapter{
+
+        private class ViewHolder{
+            TextView textView;
+            CheckBox checkBox;
+        }
+
         @Override
         public int getCount() {
             return mAnswerList.size();
@@ -125,12 +162,42 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder = null;
             if (convertView == null) {
                 convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.single_answer, parent, false);
+
+                holder = new ViewHolder();
+                holder.textView = (TextView) convertView.findViewById(R.id.list_item);
+                holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkbox);
+                convertView.setTag(holder);
             }
-            TextView textView = (TextView) convertView.findViewById(R.id.list_item);
-            textView.setText(mAnswerList.get(position));
+            else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            holder.textView.setText(mAnswerList.get(position));
+            holder.checkBox.setTag(mAnswerList.get(position));
+            holder.checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox cB = (CheckBox) v;
+                    String chosenAnswer = (String) cB.getTag();
+                    if(cB.isChecked()){
+                        mChosenAnswerList.add(chosenAnswer);
+                    } else {
+                        for(int i = 0; i < mChosenAnswerList.size(); i++){
+                            if(chosenAnswer.equals(mChosenAnswerList.get(i))){
+                                mChosenAnswerList.remove(i);
+                            }
+                        }
+                    }
+                }
+            });
+
             return convertView;
         }
+
+
     }
 }

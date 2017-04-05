@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.ui.MainActivity;
 import thesis.uom.pikedia.ui.crowdsourcingmodule.PointOfInterestShowCaseActivity;
 
 /**
@@ -35,7 +36,7 @@ public class FeatureInformationActivity extends AppCompatActivity {
         mFinishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PointOfInterestShowCaseActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

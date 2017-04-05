@@ -43,6 +43,7 @@ public class PhotographPreview extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), OpenEndedQuestionsActivity.class);
                 intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+                intent.putExtra(Constants.CASE_STUDY, getIntent().getExtras().getString(Constants.CASE_STUDY));
                 startActivity(intent);
             }
         });

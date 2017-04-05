@@ -44,11 +44,13 @@ public class ExperimentWizardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ParticipantsBasicInformationOne.class);
+
                 startActivity(intent);
             }
         });
 
         initializeScreen();
+        hideSystemUI();
     }
 
     @Override
@@ -108,6 +110,15 @@ public class ExperimentWizardActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         viewPager.clearOnPageChangeListeners();
+    }
+
+    private void hideSystemUI(){
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        |  View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        |  View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+        );
     }
 
     public class SectionPagerAdapter extends FragmentStatePagerAdapter {

@@ -5,7 +5,14 @@
     <color name="colorAccent">#607D8B</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
+    <!--<color name="colorPrimary">#F9A053</color>-->
+    <!--<color name="colorPrimaryDark">#E47C4A</color>-->
+    <!--<color name="colorAccent">#607D8B</color>-->
+    <!--<color name="primary_text">#9B7465</color>-->
+    <!--<color name="secondary_text">#C7AE9F</color>-->
     <color name="primary_light">#BBDEFB</color>
+    <color name="primary_background">#FBF8F6</color>
+    <color name="secondary_background">#EEEEEE</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
     <color name="line">#E0E0E0</color>

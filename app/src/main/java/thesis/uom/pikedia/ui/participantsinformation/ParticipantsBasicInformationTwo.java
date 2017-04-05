@@ -21,6 +21,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import fr.ganfra.materialspinner.MaterialSpinner;
 import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.model.Participant;
+import thesis.uom.pikedia.ui.MainActivity;
 import thesis.uom.pikedia.ui.crowdsourcingmodule.PhotographyTipsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
@@ -73,7 +74,7 @@ public class ParticipantsBasicInformationTwo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 writeParticipantDataToDatabase();
-                Intent intent = new Intent(getApplicationContext(), PhotographyTipsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra(Constants.PARTICIPANT_ID_KEY, mParticipantID);
                 startActivity(intent);
             }

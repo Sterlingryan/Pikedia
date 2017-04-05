@@ -314,6 +314,7 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                     mEntranceFeesList.add(AttributeList.get("element"));
                     mEntranceFeesSpinner.setAdapter(mEntranceFeesAdapter);
                 }
+                mEntranceFeesSpinner.setSelection(mEntranceFeesList.size());
             }
 
             @Override

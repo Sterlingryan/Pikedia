@@ -40,5 +40,6 @@ public final class Constants {
     public static final String CASE_STUDY_SERVICES = "Services";
     public static final String CASE_STUDY_DEPICTION = "depiction";
     public static final String CASE_STUDY_COLORS = "Colors";
-
+    public static final String CASE_STUDY_QUESTIONS = "Questions";
+    public static final String CASE_STUDY_ANSWERS = "Answers";
 }

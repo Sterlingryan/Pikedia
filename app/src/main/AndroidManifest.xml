@@ -15,27 +15,31 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.camera.PhotographPreview"/>
+        <activity android:name=".ui.camera.CameraActivity"/>
+        <activity android:name=".ui.factswizard.OpenEndedQuestionsActivity"/>
+        <activity android:name=".ui.factswizard.OneAnswerQuestionsActivity"/>
+        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsActivity"/>
+        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsOneActivity"/>
+        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsTwoActivity"/>
+        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationOne"/>
+        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationTwo"/>
+        <activity android:name=".ui.crowdsourcingmodule.ExperimentWizardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.camera.PhotographPreview"/>
-        <activity android:name=".ui.camera.CameraActivity"/>
-        <activity android:name=".ui.factswizard.OpenEndedQuestionsActivity"/>
-        <activity android:name=".ui.factswizard.OneAnswerQuestionsActivity"/>
-        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsActivity"/>
-        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationOne"/>
-        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationTwo"/>
-        <activity android:name=".ui.crowdsourcingmodule.ExperimentWizardActivity"/>
         <activity android:name=".ui.camera.FeatureCaptureActivity"/>
         <activity android:name=".ui.camera.FeaturePhotographPreview"/>
         <activity android:name=".ui.factswizard.FeatureInformationActivity"/>
         <activity android:name=".ui.crowdsourcingmodule.PhotographyTipsActivity"/>
         <activity android:name=".ui.crowdsourcingmodule.FeaturePhotographyTipsActivity"/>
         <activity android:name=".ui.crowdsourcingmodule.PointOfInterestShowCaseActivity"/>
+        <activity android:name=".ui.questions.QuestionsActivity"/>
+        <activity android:name=".ui.questions.AnswersActivity"/>
     </application>
 
 </manifest>

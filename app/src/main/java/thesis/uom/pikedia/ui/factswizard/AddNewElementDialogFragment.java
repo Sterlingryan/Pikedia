@@ -116,7 +116,7 @@ public class AddNewElementDialogFragment extends DialogFragment {
     public void addElement() {
         String element = mEditTextNewElement.getText().toString();
         if (!element.isEmpty()) {
-            mAttributesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mName).child(mAttribute).child(mParticipant).child("element");
+            mAttributesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mName).child(mAttribute).push().child("element");
             mAttributesDatabase.setValue(element);
         }
     }
