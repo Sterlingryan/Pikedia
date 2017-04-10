@@ -27,31 +27,6 @@
                         android:focusable="true"
                         android:focusableInTouchMode="true"/>
 
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
-                        android:id="@+id/linearLayout">
-
-                    <fr.ganfra.materialspinner.MaterialSpinner
-                            android:id="@+id/spinnerName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="6"
-                            app:ms_enableFloatingLabel="true"
-                            app:ms_enableErrorLabel="false"
-                            app:ms_highlightColor="@color/colorPrimary"
-                            app:ms_baseColor="@color/line"
-                            android:isScrollContainer="true"
-                            android:paddingBottom="16dp"
-                            android:paddingTop="16dp"
-                            app:ms_hintColor="@color/secondary_text"
-                            app:ms_floatingLabelColor="@color/secondary_text"
-                            app:ms_hint="@string/poi_name"
-                            app:ms_floatingLabelText="@string/poi_name"/>
-                </LinearLayout>
-
 
 
             <FrameLayout
@@ -60,7 +35,8 @@
 
                 <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@color/secondary_background">
 
                     <ListView
                             android:id="@+id/list_view_items"

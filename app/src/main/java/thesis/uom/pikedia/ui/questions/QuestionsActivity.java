@@ -14,6 +14,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private ArrayList<String> mPushIDList;
     private String mPushId;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +60,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         mQuestionList = new ArrayList<>();
         mPushIDList = new ArrayList<>();
-        toolbar.setTitle("Participant's Questions");
+        toolbar.setTitle("Questions");
         toolbar.setTitleTextColor(Color.WHITE);
 
 

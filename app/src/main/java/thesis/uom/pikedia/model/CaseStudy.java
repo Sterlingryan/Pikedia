@@ -30,6 +30,7 @@ public class CaseStudy implements Serializable{
     private HashMap<String,String> services;
     private String depiction;
     private HashMap<String,String> colors;
+    private HashMap<String,String> features;
 
 
     /* Empty Constructor for Firebase */
@@ -202,5 +203,13 @@ public class CaseStudy implements Serializable{
 
     public void setDepiction(String depiction) {
         this.depiction = depiction;
+    }
+
+    public HashMap<String, String> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(HashMap<String, String> features) {
+        this.features = features;
     }
 }

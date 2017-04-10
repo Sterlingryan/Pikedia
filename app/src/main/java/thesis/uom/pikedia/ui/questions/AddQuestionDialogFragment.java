@@ -8,6 +8,9 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,48 @@ import thesis.uom.pikedia.utils.Constants;
 public class AddQuestionDialogFragment extends DialogFragment{
     EditText mEditTextNewElement;
     String mName;
+
+    TextWatcher watcher = new TextWatcher() {
+        int mStart = 0;
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            mStart = start + count;
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String input = s.toString();
+            String capitalizedText = input.toLowerCase();
+            capitalizedText.substring(0, 1).toUpperCase();
+
+
+            if (!capitalizedText.equals(mEditTextNewElement.getText().toString())) {
+                mEditTextNewElement.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        mEditTextNewElement.setSelection(mStart);
+                        mEditTextNewElement.removeTextChangedListener(this);
+                    }
+                });
+                mEditTextNewElement.setText(capitalizedText);
+            }
+        }
+    };
 
     private DatabaseReference mAttributesDatabase;
 
@@ -65,13 +110,11 @@ public class AddQuestionDialogFragment extends DialogFragment{
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomTheme_Dialog);
-        builder.setTitle("Add a question");
+        builder.setTitle("Add A Question");
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View rootView = inflater.inflate(R.layout.dialogue_add_question, null);
         mEditTextNewElement = (EditText) rootView.findViewById(R.id.edittextElement);
-
-
         mEditTextNewElement.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -81,6 +124,7 @@ public class AddQuestionDialogFragment extends DialogFragment{
                 return true;
             }
         });
+        mEditTextNewElement.addTextChangedListener(watcher);
 
         /* Inflate and set the layout for the dialog */
         /* Pass null as the parent view because its going in the dialog layout*/

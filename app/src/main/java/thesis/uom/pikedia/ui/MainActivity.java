@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,6 +26,7 @@ import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.ui.camera.CameraActivity;
 import thesis.uom.pikedia.ui.crowdsourcingmodule.ExperimentWizardActivity;
 import thesis.uom.pikedia.ui.factswizard.OpenEndedQuestionsActivity;
+import thesis.uom.pikedia.ui.questions.QuestionsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
 /**
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialize(){
         mListView = (ListView) findViewById(R.id.caseStudyGridLayout);
+        mListView.addFooterView(getLayoutInflater().inflate(R.layout.listview_header_footer, null));
+        mListView.addHeaderView(getLayoutInflater().inflate(R.layout.listview_header_footer, null));
         final String[] caseStudies = {"Christ The King Statue", "Valletta City Gate", "New Parliament Building", "Pjazza Teatru Rjal", "Saint John's Co-Cathedral", "University Of Malta"};
 
         TextView title = (TextView) findViewById(R.id.appBarTitle);
@@ -97,12 +101,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = getLayoutInflater().inflate(R.layout.cardview_case_study, null);
             TextView titleTextView = (TextView) convertView.findViewById(R.id.textViewTitle);
             titleTextView.setText(mCaseStudyList.get(position));
+            TextView locationTextView = (TextView) convertView.findViewById(R.id.locationTextView);
+            if(position == 5){
+                locationTextView.setText("Msida, Malta");
+            } else {
+                locationTextView.setText("Valletta, Malta");
+            }
             ImageView imageView = (ImageView) convertView.findViewById(R.id.caseStudyImageView);
             Glide.with(getApplicationContext()).load(mThumbIds[position]).centerCrop().into(imageView);
+
+            ImageView questionsButton = (ImageView) convertView.findViewById(R.id.questionsButton);
+            questionsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_click_effect));
+                    Intent intent = new Intent(getApplicationContext(), QuestionsActivity.class);
+                    intent.putExtra(Constants.PARTICIPANT_ID_KEY,getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position));
+                    startActivity(intent);
+                }
+            });
             return convertView;
         }
     }

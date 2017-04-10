@@ -28,19 +28,14 @@
                     android:textColor="@color/cardview_light_background"/>
     </android.support.v7.widget.Toolbar>
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:background="@color/secondary_background"/>
-
     <ListView
             android:id="@+id/caseStudyGridLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/secondary_background"
-            android:paddingStart="25dp"
+            android:paddingStart="10dp"
             android:scrollbars="none"
-            android:paddingEnd="25dp"
+            android:paddingEnd="10dp"
             android:divider="@android:color/transparent"
             android:dividerHeight="25dp"/>
 </LinearLayout>

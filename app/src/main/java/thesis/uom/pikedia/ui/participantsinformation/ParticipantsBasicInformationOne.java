@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 import thesis.uom.pikedia.R;
@@ -64,16 +65,20 @@ public class ParticipantsBasicInformationOne extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean isStudent = false;
-                if(mEmploymentSpinner.getSelectedItemPosition() == 2){
-                    isStudent = true;
+                if(mGenderSpinner.getSelectedItemPosition() == 0 || mAgeSpinner.getSelectedItemPosition() == 0 || mEmploymentSpinner.getSelectedItemPosition() == 0 )
+                {
+                    Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                } else{
+                    if(mEmploymentSpinner.getSelectedItemPosition() == 3){
+                        isStudent = true;
+                    }
+                    Intent intent = new Intent(getApplicationContext(), ParticipantsBasicInformationTwo.class);
+                    intent.putExtra(Constants.PARTICIPANT_GENDER_KEY, mGenderSpinner.getSelectedItem().toString());
+                    intent.putExtra(Constants.PARTICIPANT_AGE_KEY, mAgeSpinner.getSelectedItem().toString());
+                    intent.putExtra(Constants.PARTICIPANT_EMPLOYMENT_KEY, mEmploymentSpinner.getSelectedItem().toString());
+                    intent.putExtra("isStudent", isStudent);
+                    startActivity(intent);
                 }
-
-                Intent intent = new Intent(getApplicationContext(), ParticipantsBasicInformationTwo.class);
-                intent.putExtra(Constants.PARTICIPANT_GENDER_KEY, mGenderSpinner.getSelectedItem().toString());
-                intent.putExtra(Constants.PARTICIPANT_AGE_KEY, mAgeSpinner.getSelectedItem().toString());
-                intent.putExtra(Constants.PARTICIPANT_EMPLOYMENT_KEY, mEmploymentSpinner.getSelectedItem().toString());
-                intent.putExtra("isStudent", isStudent);
-                startActivity(intent);
             }
         });
 

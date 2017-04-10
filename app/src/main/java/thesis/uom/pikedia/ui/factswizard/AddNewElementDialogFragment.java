@@ -72,7 +72,7 @@ public class AddNewElementDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomTheme_Dialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(mTitle)
         ;
         // Get the layout inflater

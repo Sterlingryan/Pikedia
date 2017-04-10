@@ -38,6 +38,7 @@
 
     <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionMenuTextColor">#fff</item>
+        <item name="android:textColorSecondary">@color/white</item>
     </style>`
 
 </resources>

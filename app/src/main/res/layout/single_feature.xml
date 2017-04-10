@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/featureTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/materialEditTextFeature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:textSize="16sp"
+            android:gravity="top"
+            android:hint="@string/poi_feature_hint"
+            app:met_floatingLabel="none"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_textColor="@color/primary_text"
+            app:met_textColorHint="@color/secondary_text"
+            app:met_baseColor="@color/secondary_text"
+            app:met_underlineColor="@color/line"
+            style="@style/MyEditTextTheme"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:lines="5"
+            android:inputType="textCapSentences|textAutoCorrect|textCapWords"
+            android:capitalize="sentences"
+            android:scrollHorizontally="false"
+            app:met_minCharacters="250"
+            android:focusable="true"
+            android:windowSoftInputMode="adjustUnspecified"/>
+
+</LinearLayout>
+

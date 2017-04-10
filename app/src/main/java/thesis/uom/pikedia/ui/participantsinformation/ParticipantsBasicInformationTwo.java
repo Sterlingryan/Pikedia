@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -62,7 +63,7 @@ public class ParticipantsBasicInformationTwo extends AppCompatActivity {
         mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
         mBackButton = (ImageView) findViewById(R.id.backBtn);
         mCourseEditText = (MaterialEditText) findViewById(R.id.materialEditTextCourse);
-        mLocationSpinner= (MaterialSpinner) findViewById(R.id.spinnerLocation);
+        mLocationSpinner = (MaterialSpinner) findViewById(R.id.spinnerLocation);
         mSmartPhoneOwnershipSpinner = (MaterialSpinner) findViewById(R.id.spinnerSmartPhoneOS);
         mSmartPhoneYearsofOwnerShipSpinner = (MaterialSpinner) findViewById(R.id.spinnerSmartPhoneYears);
 
@@ -73,10 +74,15 @@ public class ParticipantsBasicInformationTwo extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                writeParticipantDataToDatabase();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra(Constants.PARTICIPANT_ID_KEY, mParticipantID);
-                startActivity(intent);
+                if(mLocationSpinner.getSelectedItemPosition() == 0 || mSmartPhoneOwnershipSpinner.getSelectedItemPosition() == 0 || mSmartPhoneYearsofOwnerShipSpinner.getSelectedItemPosition() == 0){
+                    Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+                }else {
+                    writeParticipantDataToDatabase();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra(Constants.PARTICIPANT_ID_KEY, mParticipantID);
+                    startActivity(intent);
+                }
+
             }
         });
 

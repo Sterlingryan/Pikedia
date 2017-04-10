@@ -7,10 +7,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import android.app.DialogFragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -48,6 +50,10 @@ public class AnswersActivity extends AppCompatActivity {
         mAnswersList = new ArrayList<>();
         mAnswersAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, mAnswersList);
         mAnswersListView.setAdapter(mAnswersAdapter);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        toolbar.setTitle("Answers");
+        toolbar.setTitleTextColor(Color.WHITE);
 
         mAddAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override

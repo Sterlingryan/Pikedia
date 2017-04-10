@@ -37,7 +37,7 @@ public class FeedbackWizardFragment extends Fragment {
 
     public void initializeScreen(View rootView){
         ImageView mMainImage = (ImageView) rootView.findViewById(R.id.mainImageView);
-        mMainImage.setImageResource(R.drawable.ic_photo_camera_white_48dp);
+        mMainImage.setImageResource(R.drawable.ic_beenhere_white_48dp);
 
         TextView mWizardText = (TextView) rootView.findViewById(R.id.mainTextView);
         mWizardText.setText(R.string.expwzd_start_experiment);

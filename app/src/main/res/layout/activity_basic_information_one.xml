@@ -40,20 +40,25 @@
                             android:layout_marginEnd="25dp"
                             android:textSize="16sp"
                             android:gravity="top"
-                            android:hint="@string/poi_description"
+                            android:hint="@string/poi_description_hint"
                             app:met_floatingLabelText="@string/poi_description"
                             app:met_floatingLabel="highlight"
+                            app:met_floatingLabelAlwaysShown="true"
                             app:met_primaryColor="@color/colorPrimary"
                             app:met_textColor="@color/primary_text"
                             app:met_textColorHint="@color/secondary_text"
                             app:met_baseColor="@color/secondary_text"
                             app:met_underlineColor="@color/line"
                             style="@style/MyEditTextTheme"
-                            android:inputType="textMultiLine"
+                            android:lines="5"
+                            android:inputType="textCapSentences|textAutoCorrect|textCapWords"
+                            android:capitalize="sentences"
+                            android:scrollHorizontally="false"
                             android:nextFocusUp="@id/app_bar"
                             android:nextFocusLeft="@id/app_bar"
                             android:paddingTop="16dp"
-                            android:paddingBottom="16dp"/>
+                            android:paddingBottom="16dp"
+                            app:met_minCharacters="250"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                             android:id="@+id/materialEditTextPurpose"
@@ -63,20 +68,26 @@
                             android:layout_marginEnd="25dp"
                             android:textSize="16sp"
                             android:gravity="top"
-                            android:hint="@string/poi_purpose"
+                            android:hint="@string/poi_purpose_hint"
                             app:met_floatingLabelText="@string/poi_purpose"
                             app:met_floatingLabel="highlight"
+                            app:met_floatingLabelAlwaysShown="true"
                             app:met_primaryColor="@color/colorPrimary"
                             app:met_textColor="@color/primary_text"
                             app:met_textColorHint="@color/secondary_text"
                             app:met_baseColor="@color/secondary_text"
                             app:met_underlineColor="@color/line"
                             style="@style/MyEditTextTheme"
-                            android:inputType="text"
+                            android:lines="5"
+                            android:inputType="textCapSentences|textAutoCorrect|textCapWords"
+                            android:capitalize="sentences"
+                            android:scrollHorizontally="false"
                             android:nextFocusUp="@id/app_bar"
                             android:nextFocusLeft="@id/app_bar"
                             android:paddingTop="16dp"
-                            android:paddingBottom="16dp"/>
+                            android:paddingBottom="16dp"
+                            app:met_minCharacters="250"/>
+
 
                     <!--<android.support.v7.widget.AppCompatTextView-->
                             <!--android:text="@string/poi_artistic_style"-->

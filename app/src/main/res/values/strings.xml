@@ -6,7 +6,7 @@
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 
     <!-- Activity Titles -->
-    <string name="ttl_structure_information">Structure Information</string>
+    <string name="ttl_structure_information">Basic Structure Information</string>
     <string name="ttl_historical_events">Historical Events</string>
     <string name="ttl_basic_information">Basic Information</string>
     <string name="ttl_feature_description">Feature Description</string>
@@ -22,7 +22,8 @@
     <string name="poi_next">NEXT</string>
     <string name="poi_back">BACK</string>
     <string name="poi_finish">Finish</string>
-    <string name="poi_description">Describe what you see</string>
+    <string name="poi_description_hint">Describe what you see. Answer questions such as: what is it?, what style is it?, why was it built? which religion is it associated with?, which languages are used? etc&#8230;</string>
+    <string name="poi_description">Describe what you see.</string>
     <string name="poi_built_in">In what year was it built?</string>
     <string name="poi_built_by">Who built it?</string>
     <string name="poi_architect">Who designed it?</string>
@@ -30,9 +31,12 @@
     <string name="poi_event">Event</string>
     <string name="poi_religion">Which religion is it associated with?</string>
     <string name="poi_purpose">What purpose does it have?</string>
+    <string name="poi_purpose_hint">What purpose does it have?, answer questions such as: does it represent a historical event?, is there a service being offered? etc&#8230;</string>
     <string name="poi_language">What is the language used?</string>
     <string name="poi_entrance_fees">How much is the entrance fee?</string>
     <string name="poi_depiction">What does it depict?</string>
+    <string name="poi_feature_hint">Describe the feature. Answer questions such as: what is it?, what is it made out of?, what colors are used ? etc&#8230;</string>
+    <string name="poi_feature">Describe the feature.</string>
 
     <!-- Participant's Elements-->
     <string name="prt_gender">Gender</string>

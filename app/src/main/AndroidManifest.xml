@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="thesis.uom.pikedia">
+          package="thesis.uom.pikedia"
+          android:screenOrientation="portrait">
+          <!--android:windowSoftInputMode="adjustPan">-->
 
 
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -15,9 +17,11 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.MainActivity"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".ui.camera.PhotographPreview"/>
-        <activity android:name=".ui.camera.CameraActivity"/>
+        <activity android:name=".ui.camera.CameraActivity"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".ui.factswizard.OpenEndedQuestionsActivity"/>
         <activity android:name=".ui.factswizard.OneAnswerQuestionsActivity"/>
         <activity android:name=".ui.factswizard.MultipleAnswerQuestionsActivity"/>
@@ -25,7 +29,8 @@
         <activity android:name=".ui.factswizard.MultipleAnswerQuestionsTwoActivity"/>
         <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationOne"/>
         <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationTwo"/>
-        <activity android:name=".ui.crowdsourcingmodule.ExperimentWizardActivity">
+        <activity android:name=".ui.crowdsourcingmodule.ExperimentWizardActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -40,6 +45,7 @@
         <activity android:name=".ui.crowdsourcingmodule.PointOfInterestShowCaseActivity"/>
         <activity android:name=".ui.questions.QuestionsActivity"/>
         <activity android:name=".ui.questions.AnswersActivity"/>
+        <activity android:name=".ui.factswizard.FeaturesDescriptionActivity"/>
     </application>
 
 </manifest>
