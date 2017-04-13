@@ -2,8 +2,10 @@ package thesis.uom.pikedia.ui.camera;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,12 +32,12 @@ import thesis.uom.pikedia.utils.Constants;
  * Created by SterlingRyan on 3/23/2017.
  */
 
-public class PhotographPreview extends AppCompatActivity implements AddFeatureDialogFragment.OnCompleteListener {
+public class CameraIntentPhotoPreview extends AppCompatActivity implements AddFeatureDialogFragment.OnCompleteListener {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView mPreviewImageView;
     private ImageButton mFinishImageView;
     private ImageView mBackImageButton;
-    private String mPhotoPath;
     private boolean mIsSuccessful = true;
     private int counter = 0;
 
@@ -45,12 +48,37 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_preview);
-        hideSystemUI();
-        getWindow().setStatusBarColor(Color.BLACK);
 
-        mPhotoPath = getIntent().getExtras().getString("imagepath");
+        initialize();
+        hideSystemUI();
+        dispatchTakePictureIntent();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Glide.with(this).load(stream.toByteArray())
+                    .asBitmap().into(mPreviewImageView);
+        }
+    }
+
+    private void hideSystemUI(){
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        |  View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        |  View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+        );
+    }
+
+    private void initialize(){
         mPreviewImageView = (ImageView) findViewById(R.id.imageViewPhotographPreview);
-        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -99,36 +127,11 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        mPhotoPath = getIntent().getExtras().getString("imagepath");
-        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
-        hideSystemUI();
-    }
-
-    private void hideSystemUI(){
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        |  View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        |  View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE
-        );
-    }
-
     private void showAddFeatureDialogue(String name, String participantID) {
         /* Create an instance of the dialog fragment and show it */
-        DialogFragment dialog = AddFeatureDialogFragment.newInstance(name, participantID);
+        DialogFragment dialog = AddIntentFeatureDialogFragment.newInstance(name, participantID);
         dialog.show(getFragmentManager(), "AddFeatureDialogFragment");
         hideSystemUI();
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        File file = new File(mPhotoPath);
-        file.delete();
     }
 
     @Override
@@ -141,6 +144,13 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
     public void removeView(){
         counter--;
         ((ViewGroup) mCurrentLocation.getParent()).removeView(mCurrentLocation);
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
 }

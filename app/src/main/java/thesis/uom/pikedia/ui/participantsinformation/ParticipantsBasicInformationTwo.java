@@ -2,6 +2,7 @@ package thesis.uom.pikedia.ui.participantsinformation;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -44,7 +45,7 @@ public class ParticipantsBasicInformationTwo extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participants_personal_information_two);
-
+        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
         initialize();
         Log.e("See Here",((Integer)mCourseEditText.getUnderlineColor()).toString());
 
@@ -110,19 +111,6 @@ public class ParticipantsBasicInformationTwo extends AppCompatActivity {
         if(!getIntent().getExtras().getBoolean("isStudent")){
             mCourseEditText.setVisibility(View.GONE);
         }
-
-        /* Set spinner dropdown top at the foot of the its view*/
-        ViewTreeObserver vto = mLocationSpinner.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                mLocationSpinner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int measurement = mLocationSpinner.getMeasuredHeight() - 10;
-                mSmartPhoneOwnershipSpinner.setDropDownVerticalOffset(measurement);
-                mSmartPhoneYearsofOwnerShipSpinner.setDropDownVerticalOffset(measurement);
-                mLocationSpinner.setDropDownVerticalOffset(measurement);
-            }
-        });
     }
 
     private void writeParticipantDataToDatabase(){

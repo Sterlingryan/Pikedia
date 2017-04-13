@@ -37,9 +37,7 @@ public class OpenEndedQuestionsActivity extends AppCompatActivity{
     private MaterialEditText mDescriptionEditText;
 
     private ProgressBar mProgressBar;
-
-    public CaseStudy mCaseStudy = new CaseStudy();
-    public String mParticipantID;
+    private CaseStudy mCaseStudy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +51,6 @@ public class OpenEndedQuestionsActivity extends AppCompatActivity{
 
     private void initialization(){
 
-        mParticipantID = getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY);
 
         /* Initialize view */
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -65,6 +62,8 @@ public class OpenEndedQuestionsActivity extends AppCompatActivity{
         mPurposeEditText.setHorizontallyScrolling(false);
         mPurposeEditText.setLines(5);
         mPurposeEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+
+        mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
 
         LinearLayout mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -81,10 +80,9 @@ public class OpenEndedQuestionsActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "Fill all fields",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Intent intent = new Intent(getApplicationContext(), FeaturesDescriptionActivity.class);
-                    mCaseStudy.setName(getIntent().getExtras().getString(Constants.CASE_STUDY));
-                    mCaseStudy.setParticipantID(mParticipantID);
+                    Intent intent = new Intent(getApplicationContext(), OneAnswerQuestionsActivity.class);
                     mCaseStudy.setDescription(mDescriptionEditText.getText().toString());
+                    mCaseStudy.setPurpose(mPurposeEditText.getText().toString());
                     intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                     startActivity(intent);
                 }

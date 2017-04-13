@@ -46,7 +46,7 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
     private ListView mListView;
     private ArrayList<String> mFeaturesArrayList;
     private ArrayList<Line> mLinesArrayList;
-    private CaseStudy mCaseStudy;
+    private CaseStudy mCaseStudy = new CaseStudy();
 
 
     @Override
@@ -62,7 +62,9 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
         mListView = (ListView) findViewById(R.id.list_view_features);
         mFeaturesArrayList = new ArrayList<>();
         mLinesArrayList = new ArrayList<>();
-        mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
+
+        mCaseStudy.setName(getIntent().getExtras().getString(Constants.CASE_STUDY));
+        mCaseStudy.setParticipantID(getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("Features Description");
@@ -72,7 +74,8 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), OpenEndedQuestionsActivity.class);
+                mCaseStudy.setFeatures(createFeaturesHashmap());
                 intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                 startActivity(intent);
             }
@@ -108,6 +111,14 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
 
             }
         });
+    }
+
+    private HashMap<String, String> createFeaturesHashmap(){
+        HashMap<String,String> features = new HashMap<>();
+        for(int i = 0; i < mLinesArrayList.size(); i++){
+            features.put(((Integer) i).toString(),mLinesArrayList.get(i).getText());
+        }
+        return features;
     }
 
     private class FeaturesAdapter extends BaseAdapter{

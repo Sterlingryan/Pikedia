@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="thesis.uom.pikedia"
-          android:screenOrientation="portrait">
+          android:screenOrientation="portrait"
+          android:name="android.support.multidex.MultiDexApplication">
           <!--android:windowSoftInputMode="adjustPan">-->
 
 
@@ -24,6 +25,7 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".ui.factswizard.OpenEndedQuestionsActivity"/>
         <activity android:name=".ui.factswizard.OneAnswerQuestionsActivity"/>
+        <activity android:name=".ui.factswizard.OneAnswerQuestionsTwoActivity"/>
         <activity android:name=".ui.factswizard.MultipleAnswerQuestionsActivity"/>
         <activity android:name=".ui.factswizard.MultipleAnswerQuestionsOneActivity"/>
         <activity android:name=".ui.factswizard.MultipleAnswerQuestionsTwoActivity"/>
@@ -38,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.camera.FeatureCaptureActivity"/>
-        <activity android:name=".ui.camera.FeaturePhotographPreview"/>
+        <activity android:name=".ui.camera.CameraIntentPhotoPreview"/>
         <activity android:name=".ui.factswizard.FeatureInformationActivity"/>
         <activity android:name=".ui.crowdsourcingmodule.PhotographyTipsActivity"/>
         <activity android:name=".ui.crowdsourcingmodule.FeaturePhotographyTipsActivity"/>

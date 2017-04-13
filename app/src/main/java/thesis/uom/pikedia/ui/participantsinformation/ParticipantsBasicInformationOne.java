@@ -81,19 +81,6 @@ public class ParticipantsBasicInformationOne extends AppCompatActivity {
                 }
             }
         });
-
-        /* Set spinner dropdown top at the foot of the its view*/
-        ViewTreeObserver vto = mGenderSpinner.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                mGenderSpinner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int measurement = mGenderSpinner.getMeasuredHeight() - 10;
-                mGenderSpinner.setDropDownVerticalOffset(measurement);
-                mAgeSpinner.setDropDownVerticalOffset(measurement);
-                mEmploymentSpinner.setDropDownVerticalOffset(measurement);
-            }
-        });
     }
 
 }

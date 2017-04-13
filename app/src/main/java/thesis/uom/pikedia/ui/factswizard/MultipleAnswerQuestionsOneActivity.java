@@ -35,6 +35,7 @@ import java.util.List;
 
 import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.model.CaseStudy;
+import thesis.uom.pikedia.ui.MainActivity;
 import thesis.uom.pikedia.utils.Constants;
 
 /**
@@ -56,7 +57,7 @@ public class MultipleAnswerQuestionsOneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic_information_list);
+        setContentView(R.layout.activity_basic_information_list_finish);
 
         initiate();
         retrieveData();
@@ -96,9 +97,9 @@ public class MultipleAnswerQuestionsOneActivity extends AppCompatActivity {
                     hashMap.put(((Integer) i).toString(),mChosenAnswerList.get(i));
                 }
                 mCaseStudy.setServices(hashMap);
-                Intent intent = new Intent(getApplicationContext(), MultipleAnswerQuestionsTwoActivity.class);
-                intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
-                intent.putExtra(Constants.CASE_STUDY_ATTTRIBUTE, Constants.CASE_STUDY_COLORS);
+                saveCaseStudyToDatabase();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(Constants.PARTICIPANT_ID_KEY, mCaseStudy.getParticipantID());
                 startActivity(intent);
             }
         });
@@ -136,6 +137,11 @@ public class MultipleAnswerQuestionsOneActivity extends AppCompatActivity {
         /* Create an instance of the dialog fragment and show it */
         DialogFragment dialog = AddNewElementDialogFragment.newInstance(title, caseStudyName, attribute, mCaseStudy.getParticipantID());
         dialog.show(getFragmentManager(), "AddAttributeDialogFragment");
+    }
+
+    private void saveCaseStudyToDatabase(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.CASE_STUDY).push();
+        ref.setValue(mCaseStudy);
     }
 
     private class AnswerAdapter extends BaseAdapter{

@@ -1,16 +1,14 @@
-package thesis.uom.pikedia.ui.questions;
+package thesis.uom.pikedia.ui.camera;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,30 +18,48 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import thesis.uom.pikedia.R;
-import thesis.uom.pikedia.ui.factswizard.AddNewElementDialogFragment;
 import thesis.uom.pikedia.utils.Constants;
 
 /**
- * Created by SterlingRyan on 4/3/2017.
+ * Created by SterlingRyan on 4/13/2017.
  */
 
-public class AddQuestionDialogFragment extends DialogFragment{
+public class AddIntentFeatureDialogFragment extends DialogFragment {
     EditText mEditTextNewElement;
-    String mName;
-
     private DatabaseReference mAttributesDatabase;
+    private String mName;
+    private String mParticipantID;
+    private boolean mIsAdded = false;
 
+    public static interface OnCompleteListener {
+        public abstract void onComplete(boolean isSuccessful);
+    }
+
+    private AddFeatureDialogFragment.OnCompleteListener mListener;
+
+    // make sure the Activity implemented it
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            this.mListener = (AddFeatureDialogFragment.OnCompleteListener)activity;
+        }
+        catch (final ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnCompleteListener");
+        }
+    }
 
     /**
      * Public static constructor that creates fragment and
      * passes a bundle with data into it when adapter is created
      */
-    public static AddQuestionDialogFragment newInstance(String name) {
-        AddQuestionDialogFragment addQuestionDialogFragment = new AddQuestionDialogFragment();
+    public static AddIntentFeatureDialogFragment newInstance(String name, String participantID) {
+        AddIntentFeatureDialogFragment addFeatureDialogFragment = new AddIntentFeatureDialogFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("name", name);
-        addQuestionDialogFragment.setArguments(bundle);
-        return addQuestionDialogFragment;
+        bundle.putString(Constants.CASE_STUDY, name);
+        bundle.putString(Constants.PARTICIPANT_ID_KEY, participantID);
+        addFeatureDialogFragment.setArguments(bundle);
+        return addFeatureDialogFragment;
     }
 
     /**
@@ -52,7 +68,8 @@ public class AddQuestionDialogFragment extends DialogFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mName = getArguments().getString("name");
+        mName = getArguments().getString(Constants.CASE_STUDY);
+        mParticipantID = getArguments().getString(Constants.PARTICIPANT_ID_KEY);
     }
 
     /**
@@ -67,12 +84,15 @@ public class AddQuestionDialogFragment extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.CustomTheme_Dialog);
-        builder.setTitle("Add A Question");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Add Feature");
+
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View rootView = inflater.inflate(R.layout.dialogue_add_question, null);
+        View rootView = inflater.inflate(R.layout.dialogue_add_element, null);
         mEditTextNewElement = (EditText) rootView.findViewById(R.id.edittextElement);
+
+
         mEditTextNewElement.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -95,6 +115,7 @@ public class AddQuestionDialogFragment extends DialogFragment{
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        removeView();
                         dialog.cancel();
                     }
                 });
@@ -102,14 +123,32 @@ public class AddQuestionDialogFragment extends DialogFragment{
         return builder.create();
     }
 
+
     /**
      * Add new active list
      */
     public void addElement() {
         String element = mEditTextNewElement.getText().toString();
         if (!element.isEmpty()) {
-            mAttributesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mName).child(Constants.CASE_STUDY_QUESTIONS).push().child("question");
-            mAttributesDatabase.setValue(element + " ?");
+            mIsAdded = true;
+            mAttributesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mName).child(Constants.CASE_STUDY_FEATURES).child(mParticipantID).push().child("feature");
+            mAttributesDatabase.setValue(element);
         }
+        else{
+            this.mListener.onComplete(false);
+        }
+    }
+
+    private void removeView(){
+        mIsAdded = true;
+        ((CameraIntentPhotoPreview)getActivity()).removeView();
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        if(!mIsAdded){
+            removeView();
+        }
+        super.onDismiss(dialog);
     }
 }

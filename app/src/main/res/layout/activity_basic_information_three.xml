@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -34,44 +33,44 @@
                       android:background="@color/cardview_light_background">
 
             <LinearLayout
+                android:id="@+id/linearLayoutArtisticStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp">
+
+            <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/addArtisticStyleImageButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:backgroundTint="@color/colorPrimary"
+                    android:src="@drawable/ic_add_white_18dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="25dp"
+                    app:fabSize="mini"
+                    android:elevation="6dp"
+                    app:pressedTranslationZ="12dp"/>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                    android:id="@+id/spinnerArtisticStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp">
+                    android:layout_weight="6"
+                    app:ms_enableFloatingLabel="true"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_highlightColor="@color/colorPrimary"
+                    app:ms_baseColor="@color/line"
+                    android:isScrollContainer="true"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    app:ms_hintColor="@color/secondary_text"
+                    app:ms_floatingLabelColor="@color/secondary_text"
+                    app:ms_hint="@string/poi_artistic_style"
+                    app:ms_floatingLabelText="@string/poi_artistic_style"/>
 
-                <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/addBuiltInImageButton"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:backgroundTint="@color/colorPrimary"
-                        android:src="@drawable/ic_add_white_18dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginRight="25dp"
-                        app:fabSize="mini"
-                        android:elevation="6dp"
-                        app:pressedTranslationZ="12dp"/>
-
-                <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinnerBuiltIn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:isScrollContainer="true"
-                        android:paddingBottom="16dp"
-                        android:paddingTop="16dp"
-                        app:ms_enableFloatingLabel="true"
-                        app:ms_hintColor="@color/secondary_text"
-                        app:ms_floatingLabelColor="@color/secondary_text"
-                        app:ms_hint="@string/poi_built_in"
-                        app:ms_floatingLabelText="@string/poi_built_in"
-                        app:ms_enableErrorLabel="false"
-                        app:ms_highlightColor="@color/colorPrimary"
-                        app:ms_baseColor="@color/line"/>
-
-
-            </LinearLayout>
+        </LinearLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -81,7 +80,7 @@
                     android:layout_marginEnd="25dp">
 
                 <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/addTypeOfArchitectureImageButton"
+                        android:id="@+id/addLanguageImageButton"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:backgroundTint="@color/colorPrimary"
@@ -94,7 +93,7 @@
                         app:pressedTranslationZ="12dp"/>
 
                 <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinnerTypeOfArchitecture"
+                        android:id="@+id/spinnerLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
@@ -107,8 +106,8 @@
                         android:paddingTop="16dp"
                         app:ms_hintColor="@color/secondary_text"
                         app:ms_floatingLabelColor="@color/secondary_text"
-                        app:ms_hint="@string/poi_architecture_type"
-                        app:ms_floatingLabelText="@string/poi_architecture_type"/>
+                        app:ms_hint="@string/poi_language"
+                        app:ms_floatingLabelText="@string/poi_language"/>
 
 
             </LinearLayout>
@@ -121,7 +120,7 @@
                     android:layout_marginEnd="25dp">
 
                 <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/addBuiltByImageButton"
+                        android:id="@+id/addEntranceFeeImageButton"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:backgroundTint="@color/colorPrimary"
@@ -129,13 +128,12 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="25dp"
-
                         app:fabSize="mini"
                         android:elevation="6dp"
                         app:pressedTranslationZ="12dp"/>
 
                 <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinnerBuiltBy"
+                        android:id="@+id/spinnerEntranceFees"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
@@ -148,8 +146,8 @@
                         android:paddingTop="16dp"
                         app:ms_hintColor="@color/secondary_text"
                         app:ms_floatingLabelColor="@color/secondary_text"
-                        app:ms_hint="@string/poi_built_by"
-                        app:ms_floatingLabelText="@string/poi_built_by"/>
+                        app:ms_hint="@string/poi_entrance_fees"
+                        app:ms_floatingLabelText="@string/poi_entrance_fees"/>
 
 
             </LinearLayout>
@@ -162,7 +160,7 @@
                     android:layout_marginEnd="25dp">
 
                 <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/addArchitectImageButton"
+                        android:id="@+id/addDepictionImageButton"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:backgroundTint="@color/colorPrimary"
@@ -175,7 +173,7 @@
                         app:pressedTranslationZ="12dp"/>
 
                 <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinnerArchitect"
+                        android:id="@+id/spinnerDepiction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
@@ -188,48 +186,8 @@
                         android:paddingTop="16dp"
                         app:ms_hintColor="@color/secondary_text"
                         app:ms_floatingLabelColor="@color/secondary_text"
-                        app:ms_hint="@string/poi_architect"
-                        app:ms_floatingLabelText="@string/poi_architect"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp">
-
-                <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/addReligionImageButton"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:backgroundTint="@color/colorPrimary"
-                        android:src="@drawable/ic_add_white_18dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginRight="25dp"
-                        app:fabSize="mini"
-                        android:elevation="6dp"
-                        app:pressedTranslationZ="12dp"/>
-
-                <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinnerReligion"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        app:ms_enableFloatingLabel="true"
-                        app:ms_enableErrorLabel="false"
-                        app:ms_highlightColor="@color/colorPrimary"
-                        app:ms_baseColor="@color/line"
-                        android:isScrollContainer="true"
-                        android:paddingBottom="16dp"
-                        android:paddingTop="16dp"
-                        app:ms_hintColor="@color/secondary_text"
-                        app:ms_floatingLabelColor="@color/secondary_text"
-                        app:ms_hint="@string/poi_religion"
-                        app:ms_floatingLabelText="@string/poi_religion"/>
+                        app:ms_hint="@string/poi_depiction"
+                        app:ms_floatingLabelText="@string/poi_depiction"/>
 
 
             </LinearLayout>

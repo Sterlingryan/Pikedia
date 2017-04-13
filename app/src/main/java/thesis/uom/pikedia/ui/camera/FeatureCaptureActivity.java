@@ -110,7 +110,7 @@ public class FeatureCaptureActivity extends AppCompatActivity implements View.On
                             }
                         }
                     }
-                    Intent intent = new Intent(getApplicationContext(), FeaturePhotographPreview.class);
+                    Intent intent = new Intent(getApplicationContext(), CameraIntentPhotoPreview.class);
                     intent.putExtra("imagepath", mFile.getAbsolutePath());
                     startActivity(intent);
 
