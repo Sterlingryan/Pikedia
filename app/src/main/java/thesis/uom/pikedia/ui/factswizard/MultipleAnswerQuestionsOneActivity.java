@@ -57,7 +57,7 @@ public class MultipleAnswerQuestionsOneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic_information_list_finish);
+        setContentView(R.layout.activity_basic_information_list);
 
         initiate();
         retrieveData();
@@ -97,9 +97,9 @@ public class MultipleAnswerQuestionsOneActivity extends AppCompatActivity {
                     hashMap.put(((Integer) i).toString(),mChosenAnswerList.get(i));
                 }
                 mCaseStudy.setServices(hashMap);
-                saveCaseStudyToDatabase();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra(Constants.PARTICIPANT_ID_KEY, mCaseStudy.getParticipantID());
+                Intent intent = new Intent(getApplicationContext(), MultipleAnswerQuestionsTwoActivity.class);
+                intent.putExtra(Constants.CASE_STUDY_ATTTRIBUTE, Constants.CASE_STUDY_HISTORICAL_EVENTS);
+                intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                 startActivity(intent);
             }
         });
@@ -139,10 +139,7 @@ public class MultipleAnswerQuestionsOneActivity extends AppCompatActivity {
         dialog.show(getFragmentManager(), "AddAttributeDialogFragment");
     }
 
-    private void saveCaseStudyToDatabase(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.CASE_STUDY).push();
-        ref.setValue(mCaseStudy);
-    }
+
 
     private class AnswerAdapter extends BaseAdapter{
 

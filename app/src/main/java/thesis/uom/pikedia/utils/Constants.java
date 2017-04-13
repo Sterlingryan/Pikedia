@@ -30,7 +30,7 @@ public final class Constants {
     public static final String CASE_STUDY_BUILT_BY = "built_by";
     public static final String CASE_STUDY_BUILT_IN = "built_in";
     public static final String CASE_STUDY_ARCHITECT = "architect";
-    public static final String CASE_STUDY_HISTORICAL_EVENTS = "historical_events";
+    public static final String CASE_STUDY_HISTORICAL_EVENTS = "Historical Events";
     public static final String CASE_STUDY_RELIGION = "religion";
     public static final String CASE_STUDY_MATERIALS = "Building Materials";
     public static final String CASE_STUDY_PURPOSE = "purpose";

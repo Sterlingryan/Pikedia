@@ -19,7 +19,6 @@ public class CaseStudy implements Serializable{
     private String architect;
     private String longitude;
     private String latitude;
-    private String historicalEvents;
     private String imageGUID;
     private String religion;
     private HashMap<String,String> materials;
@@ -29,7 +28,7 @@ public class CaseStudy implements Serializable{
     private String entranceFees;
     private HashMap<String,String> services;
     private String depiction;
-    private HashMap<String,String> colors;
+    private HashMap<String,String> historicalEvents;
     private HashMap<String,String> features;
 
 
@@ -117,14 +116,6 @@ public class CaseStudy implements Serializable{
         this.latitude = latitude;
     }
 
-    public String getHistoricalEvents() {
-        return historicalEvents;
-    }
-
-    public void setHistoricalEvents(String historicalEvents) {
-        this.historicalEvents = historicalEvents;
-    }
-
     public String getImageGUID() {
         return imageGUID;
     }
@@ -189,12 +180,12 @@ public class CaseStudy implements Serializable{
         this.services = services;
     }
 
-    public HashMap<String, String> getColors() {
-        return colors;
+    public HashMap<String, String> getHistoricalEvents() {
+        return historicalEvents;
     }
 
-    public void setColors(HashMap<String, String> colors) {
-        this.colors = colors;
+    public void setHistoricalEvents(HashMap<String, String> historicalEvents) {
+        this.historicalEvents = historicalEvents;
     }
 
     public String getDepiction() {

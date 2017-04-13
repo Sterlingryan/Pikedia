@@ -35,21 +35,19 @@ import thesis.uom.pikedia.utils.Constants;
 public class OneAnswerQuestionsActivity extends AppCompatActivity {
     private MaterialSpinner mBuiltInSpinner;
     private MaterialSpinner mTypeOfArchitectureSpinner;
-    private MaterialSpinner mBuiltBySpinner;
-    private MaterialSpinner mArchitectSpinner;
-    private MaterialSpinner mReligionSpinner;
+    private MaterialSpinner mArtisticStyleSpinner;
+    private MaterialSpinner mDepictionSpinner;
 
-    private ArrayAdapter<String> mReligionAdapter;
+
     private ArrayAdapter<String> mBuiltInAdapter;
-    private ArrayAdapter<String> mBuiltByAdapter;
-    private ArrayAdapter<String> mArchitectAdapter;
     private ArrayAdapter<String> mTypeOfArchitectureAdapter;
+    private ArrayAdapter<String> mArtisticStyleAdapter;
+    private ArrayAdapter<String> mDepictionAdapter;
 
     private ArrayList<String> mBuiltInList;
-    private ArrayList<String> mReligionList;
-    private ArrayList<String> mBuiltByList;
-    private ArrayList<String> mArchitectList;
     private ArrayList<String> mTypeOfArchitectureList;
+    private ArrayList<String> mArtisticStyleList;
+    private ArrayList<String> mDepictionList;
 
     private boolean mIsAdded = false;
 
@@ -69,36 +67,30 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
      */
     private void initialize(){
         mBuiltInSpinner = (MaterialSpinner) findViewById(R.id.spinnerBuiltIn);
-        mBuiltBySpinner = (MaterialSpinner) findViewById(R.id.spinnerBuiltBy);
-        mArchitectSpinner = (MaterialSpinner) findViewById(R.id.spinnerArchitect);
-        mReligionSpinner = (MaterialSpinner) findViewById(R.id.spinnerReligion);
+        mArtisticStyleSpinner = (MaterialSpinner) findViewById(R.id.spinnerArtisticStyle);
+        mDepictionSpinner = (MaterialSpinner) findViewById(R.id.spinnerDepiction);
         mTypeOfArchitectureSpinner = (MaterialSpinner) findViewById(R.id.spinnerTypeOfArchitecture);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         LinearLayout mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
         ImageView mBackButton = (ImageView) findViewById(R.id.backBtn);
-        FloatingActionButton mAddBuiltByButton = (FloatingActionButton) findViewById(R.id.addBuiltByImageButton);
         FloatingActionButton mAddBuiltInButton = (FloatingActionButton) findViewById(R.id.addBuiltInImageButton);
-        FloatingActionButton mAddArchitectButton = (FloatingActionButton) findViewById(R.id.addArchitectImageButton);
+        FloatingActionButton mAddDepictionButton = (FloatingActionButton) findViewById(R.id.addDepictionImageButton);
+        FloatingActionButton mAddArtisticStyleButton = (FloatingActionButton) findViewById(R.id.addArtisticStyleImageButton);
         FloatingActionButton mAddTypeOfArchitectureButton = (FloatingActionButton) findViewById(R.id.addTypeOfArchitectureImageButton);
-        FloatingActionButton mReligionButton = (FloatingActionButton) findViewById(R.id.addReligionImageButton);
 
-        mBuiltByList = new ArrayList<>();
-        mReligionList = new ArrayList<>();
-        mBuiltByList = new ArrayList<>();
+        mDepictionList = new ArrayList<>();
+        mArtisticStyleList = new ArrayList<>();
         mBuiltInList = new ArrayList<>();
-        mArchitectList = new ArrayList<>();
         mTypeOfArchitectureList = new ArrayList<>();
 
-        mReligionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mReligionList);
-        mBuiltByAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mBuiltByList);
+        mDepictionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mDepictionList);
+        mArtisticStyleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mArtisticStyleList);
         mBuiltInAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mBuiltInList);
-        mArchitectAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mArchitectList);
         mTypeOfArchitectureAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mTypeOfArchitectureList);
 
-        mReligionSpinner.setAdapter(mReligionAdapter);
-        mBuiltBySpinner.setAdapter(mBuiltByAdapter);
+        mDepictionSpinner.setAdapter(mDepictionAdapter);
+        mArtisticStyleSpinner.setAdapter(mArtisticStyleAdapter);
         mBuiltInSpinner.setAdapter(mBuiltInAdapter);
-        mArchitectSpinner.setAdapter(mArchitectAdapter);
         mTypeOfArchitectureSpinner.setAdapter(mTypeOfArchitectureAdapter);
 
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
@@ -107,11 +99,10 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), OneAnswerQuestionsTwoActivity.class);
-                mCaseStudy.setArchitect(mArchitectSpinner.getSelectedItem().toString());
-                mCaseStudy.setBuiltBy(mBuiltBySpinner.getSelectedItem().toString());
+                mCaseStudy.setDepiction(mDepictionSpinner.getSelectedItem().toString());
+                mCaseStudy.setArtisticStyle(mArtisticStyleSpinner.getSelectedItem().toString());
                 mCaseStudy.setBuiltIn(mBuiltInSpinner.getSelectedItem().toString());
                 mCaseStudy.setTypesOfArchitecture(mTypeOfArchitectureSpinner.getSelectedItem().toString());
-                mCaseStudy.setReligion(mReligionSpinner.getSelectedItem().toString());
                 intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                 startActivity(intent);
             }
@@ -124,19 +115,11 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
             }
         });
 
-        mAddArchitectButton.setOnClickListener(new View.OnClickListener() {
+        mAddArtisticStyleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mIsAdded = true;
-                showAddAttributeDialog("Add architect",mCaseStudy.getName(), Constants.CASE_STUDY_ARCHITECT);
-            }
-        });
-
-        mAddBuiltByButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mIsAdded = true;
-                showAddAttributeDialog("Add entity",mCaseStudy.getName(), Constants.CASE_STUDY_BUILT_BY);
+                showAddAttributeDialog("Add Artistic Style",mCaseStudy.getName(), Constants.CASE_STUDY_ARTISTIC_STYLE);
             }
         });
 
@@ -144,7 +127,15 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mIsAdded = true;
-                showAddAttributeDialog("Add year",mCaseStudy.getName(), Constants.CASE_STUDY_BUILT_IN);
+                showAddAttributeDialog("Add Build Year",mCaseStudy.getName(), Constants.CASE_STUDY_BUILT_IN);
+            }
+        });
+
+        mAddDepictionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIsAdded = true;
+                showAddAttributeDialog("Add Depiction",mCaseStudy.getName(), Constants.CASE_STUDY_DEPICTION);
             }
         });
 
@@ -152,36 +143,12 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mIsAdded = true;
-                showAddAttributeDialog("Add building Type",mCaseStudy.getName(), Constants.CASE_STUDY_ARCHITECTURE_TYPE);
+                showAddAttributeDialog("Add Building Type",mCaseStudy.getName(), Constants.CASE_STUDY_ARCHITECTURE_TYPE);
             }
         });
-
-        mReligionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mIsAdded = true;
-                showAddAttributeDialog("Add religion",mCaseStudy.getName(), Constants.CASE_STUDY_RELIGION);
-            }
-        });
-
 
         toolbar.setTitle(R.string.ttl_structure_information);
         toolbar.setTitleTextColor(Color.WHITE);
-
-        /* Set spinner dropdown top at the foot of the its view*/
-        ViewTreeObserver vto = mBuiltBySpinner.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                mBuiltBySpinner.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int measurement = mBuiltBySpinner.getMeasuredHeight() - 10;
-                mBuiltBySpinner.setDropDownVerticalOffset(measurement);
-                mReligionSpinner.setDropDownVerticalOffset(measurement);
-                mArchitectSpinner.setDropDownVerticalOffset(measurement);
-                mBuiltInSpinner.setDropDownVerticalOffset(measurement);
-                mTypeOfArchitectureSpinner.setDropDownVerticalOffset(measurement);
-            }
-        });
     }
 
     private void retrieveData(){
@@ -195,8 +162,22 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                     mBuiltInList.add(AttributeList.get("element"));
                     mBuiltInSpinner.setAdapter(mBuiltInAdapter);
                 }
-                if(mIsAdded){
-                    mBuiltInSpinner.setSelection(mBuiltByList.size());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mCaseStudiesDatabase.child(Constants.CASE_STUDY_DEPICTION).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mDepictionAdapter.clear();
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+                    HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
+                    mDepictionList.add(AttributeList.get("element"));
+                    mDepictionSpinner.setAdapter(mDepictionAdapter);
                 }
             }
 
@@ -206,31 +187,14 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
             }
         });
 
-        mCaseStudiesDatabase.child(Constants.CASE_STUDY_BUILT_BY).addValueEventListener(new ValueEventListener() {
+        mCaseStudiesDatabase.child(Constants.CASE_STUDY_ARTISTIC_STYLE).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mBuiltByAdapter.clear();
+                mArtisticStyleAdapter.clear();
                 for(DataSnapshot child: dataSnapshot.getChildren()){
                     HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
-                    mBuiltByList.add(AttributeList.get("element"));
-                    mBuiltBySpinner.setAdapter(mBuiltByAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        mCaseStudiesDatabase.child(Constants.CASE_STUDY_ARCHITECT).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mArchitectAdapter.clear();
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-                    HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
-                    mArchitectList.add(AttributeList.get("element"));
-                    mArchitectSpinner.setAdapter(mArchitectAdapter);
+                    mArtisticStyleList.add(AttributeList.get("element"));
+                    mArtisticStyleSpinner.setAdapter(mArtisticStyleAdapter);
                 }
             }
 
@@ -248,23 +212,6 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                     HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
                     mTypeOfArchitectureList.add(AttributeList.get("element"));
                     mTypeOfArchitectureSpinner.setAdapter(mTypeOfArchitectureAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        mCaseStudiesDatabase.child(Constants.CASE_STUDY_RELIGION).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mReligionAdapter.clear();
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-                    HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
-                    mReligionList.add(AttributeList.get("element"));
-                    mReligionSpinner.setAdapter(mReligionAdapter);
                 }
             }
 

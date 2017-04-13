@@ -35,6 +35,7 @@ import java.util.List;
 
 import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.model.CaseStudy;
+import thesis.uom.pikedia.ui.MainActivity;
 import thesis.uom.pikedia.ui.crowdsourcingmodule.FeaturePhotographyTipsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
@@ -57,7 +58,7 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic_information_list);
+        setContentView(R.layout.activity_basic_information_list_finish);
 
         initiate();
         retrieveData();
@@ -96,9 +97,10 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
                 for(int i = 0; i < mChosenAnswerList.size(); i++){
                     hashMap.put(((Integer) i).toString(),mChosenAnswerList.get(i));
                 }
-                mCaseStudy.setColors(hashMap);
-                Intent intent = new Intent(getApplicationContext(), FeaturePhotographyTipsActivity.class);
-                intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+                mCaseStudy.setHistoricalEvents(hashMap);
+                saveCaseStudyToDatabase();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(Constants.PARTICIPANT_ID_KEY, mCaseStudy.getParticipantID());
                 startActivity(intent);
             }
         });
@@ -130,6 +132,11 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void saveCaseStudyToDatabase(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.CASE_STUDY).push();
+        ref.setValue(mCaseStudy);
     }
 
     private void showAddAttributeDialog(String title, String caseStudyName, String attribute) {

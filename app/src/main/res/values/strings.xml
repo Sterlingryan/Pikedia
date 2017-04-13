@@ -7,6 +7,7 @@
 
     <!-- Activity Titles -->
     <string name="ttl_structure_information">Basic Structure Information</string>
+    <string name="ttl_background_information">Background Information</string>
     <string name="ttl_historical_events">Historical Events</string>
     <string name="ttl_basic_information">Basic Information</string>
     <string name="ttl_feature_description">Feature Description</string>
