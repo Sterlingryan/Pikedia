@@ -38,7 +38,7 @@
             android:inputType="textCapSentences|textAutoCorrect|textCapWords"
             android:capitalize="sentences"
             android:scrollHorizontally="false"
-            app:met_minCharacters="250"
+            app:met_minCharacters="100"
             android:focusable="true"
             android:windowSoftInputMode="adjustUnspecified"/>
 

@@ -81,13 +81,13 @@ public class MainActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT <= 20) {
                     intent = new Intent(getApplicationContext(), CameraIntentPhotoPreview.class);
                     intent.putExtra(Constants.PARTICIPANT_ID_KEY,getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position));
+                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position-1));
                     startActivity(intent);
                 }
                 else{
                     intent = new Intent(getApplicationContext(), CameraActivity.class);
                     intent.putExtra(Constants.PARTICIPANT_ID_KEY,getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position));
+                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position-1));
                     startActivity(intent);
                 }
 

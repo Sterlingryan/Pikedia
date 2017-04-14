@@ -63,8 +63,7 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
         mFeaturesArrayList = new ArrayList<>();
         mLinesArrayList = new ArrayList<>();
 
-        mCaseStudy.setName(getIntent().getExtras().getString(Constants.CASE_STUDY));
-        mCaseStudy.setParticipantID(getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+        mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         toolbar.setTitle("Features Description");

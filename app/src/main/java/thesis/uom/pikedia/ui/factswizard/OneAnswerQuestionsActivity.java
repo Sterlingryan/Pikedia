@@ -8,14 +8,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,9 +76,9 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         LinearLayout mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
         ImageView mBackButton = (ImageView) findViewById(R.id.backBtn);
-        FloatingActionButton mAddBuiltInButton = (FloatingActionButton) findViewById(R.id.addBuiltInImageButton);
-        FloatingActionButton mAddDepictionButton = (FloatingActionButton) findViewById(R.id.addDepictionImageButton);
-        FloatingActionButton mAddArtisticStyleButton = (FloatingActionButton) findViewById(R.id.addArtisticStyleImageButton);
+        final FloatingActionButton mAddBuiltInButton = (FloatingActionButton) findViewById(R.id.addBuiltInImageButton);
+        final FloatingActionButton mAddDepictionButton = (FloatingActionButton) findViewById(R.id.addDepictionImageButton);
+        final FloatingActionButton mAddArtisticStyleButton = (FloatingActionButton) findViewById(R.id.addArtisticStyleImageButton);
         FloatingActionButton mAddTypeOfArchitectureButton = (FloatingActionButton) findViewById(R.id.addTypeOfArchitectureImageButton);
 
         mDepictionList = new ArrayList<>();
@@ -118,7 +121,6 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
         mAddArtisticStyleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIsAdded = true;
                 showAddAttributeDialog("Add Artistic Style",mCaseStudy.getName(), Constants.CASE_STUDY_ARTISTIC_STYLE);
             }
         });
@@ -126,15 +128,13 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
         mAddBuiltInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIsAdded = true;
-                showAddAttributeDialog("Add Build Year",mCaseStudy.getName(), Constants.CASE_STUDY_BUILT_IN);
+                showAddNumberDialog("Add Build Year",mCaseStudy.getName(), Constants.CASE_STUDY_BUILT_IN);
             }
         });
 
         mAddDepictionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIsAdded = true;
                 showAddAttributeDialog("Add Depiction",mCaseStudy.getName(), Constants.CASE_STUDY_DEPICTION);
             }
         });
@@ -142,7 +142,6 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
         mAddTypeOfArchitectureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIsAdded = true;
                 showAddAttributeDialog("Add Building Type",mCaseStudy.getName(), Constants.CASE_STUDY_ARCHITECTURE_TYPE);
             }
         });
@@ -226,5 +225,11 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
         /* Create an instance of the dialog fragment and show it */
         DialogFragment dialog = AddNewElementDialogFragment.newInstance(title, caseStudyName, attribute, mCaseStudy.getParticipantID());
         dialog.show(getFragmentManager(), "AddAttributeDialogFragment");
+    }
+
+    private void showAddNumberDialog(String title, String caseStudyName, String attribute) {
+        /* Create an instance of the dialog fragment and show it */
+        DialogFragment dialog = AddNewNumbersDialogFragment.newInstance(title, caseStudyName, attribute, mCaseStudy.getParticipantID());
+        dialog.show(getFragmentManager(), "AddNumbersDialogFragment");
     }
 }

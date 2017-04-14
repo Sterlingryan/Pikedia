@@ -74,6 +74,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     //Convert orientations to JPEG
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static final int REQUEST_CAMERA_PERMISSION = 1;
+    private static final int REQUEST_LOCATION_PERMISSION = 2;
     private static final String FRAGMENT_DIALOG = "dialog";
 
     // Handler members
@@ -383,6 +384,11 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             requestCameraPermission();
             return;
         }
+        if(ContextCompat.checkSelfPermission(this , Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            requestLocationPermission();
+            return;
+        }
         setUpCameraOutputs(width,height);
         configureTransform(width,height);
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -403,6 +409,12 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.CAMERA},
                 REQUEST_CAMERA_PERMISSION);
+    }
+
+    public void requestLocationPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                REQUEST_LOCATION_PERMISSION);
     }
 
     // Sets up member variables related to camera

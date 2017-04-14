@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -60,7 +61,7 @@ public class OpenEndedQuestionsActivity extends AppCompatActivity{
         mDescriptionEditText.setLines(5);
         mDescriptionEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         mPurposeEditText.setHorizontallyScrolling(false);
-        mPurposeEditText.setLines(5);
+        mPurposeEditText.setLines(3);
         mPurposeEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
@@ -87,6 +88,14 @@ public class OpenEndedQuestionsActivity extends AppCompatActivity{
                     startActivity(intent);
                 }
 
+            }
+        });
+
+        ImageView backBtn = (ImageView) findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

@@ -203,4 +203,6 @@ public class CaseStudy implements Serializable{
     public void setFeatures(HashMap<String, String> features) {
         this.features = features;
     }
+
+
 }

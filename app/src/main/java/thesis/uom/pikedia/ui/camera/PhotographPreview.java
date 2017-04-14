@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.model.CaseStudy;
 import thesis.uom.pikedia.ui.factswizard.FeaturesDescriptionActivity;
 import thesis.uom.pikedia.ui.factswizard.OpenEndedQuestionsActivity;
 import thesis.uom.pikedia.utils.Constants;
@@ -39,6 +40,7 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
     private int counter = 0;
 
     private ImageView mCurrentLocation;
+    private CaseStudy mCaseStudy;
 
 
     @Override
@@ -48,6 +50,7 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
         hideSystemUI();
         getWindow().setStatusBarColor(Color.BLACK);
 
+        mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
         mPhotoPath = getIntent().getExtras().getString("imagepath");
         mPreviewImageView = (ImageView) findViewById(R.id.imageViewPhotographPreview);
         Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
@@ -69,7 +72,7 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
                     mCurrentLocation.setImageDrawable(getResources().getDrawable(
                             R.drawable.ic_location_searching_black_24dp));
                     ((ViewGroup) v).addView(mCurrentLocation);
-                    showAddFeatureDialogue(getIntent().getExtras().getString(Constants.CASE_STUDY), getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+                    showAddFeatureDialogue(mCaseStudy.getName(), mCaseStudy.getParticipantID());
                 }
                 return false;
             }
@@ -83,8 +86,7 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
                     Toast.makeText(getApplicationContext(), "Tag the photo preview for building features", Toast.LENGTH_LONG).show();
                 }else {
                     Intent intent = new Intent(getApplicationContext(), FeaturesDescriptionActivity.class);
-                    intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-                    intent.putExtra(Constants.CASE_STUDY, getIntent().getExtras().getString(Constants.CASE_STUDY));
+                    intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                     startActivity(intent);
                 }
             }
