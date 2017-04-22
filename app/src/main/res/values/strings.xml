@@ -13,8 +13,9 @@
     <string name="ttl_feature_description">Feature Description</string>
     <string name="ttl_architectural_information">Architectural Information</string>
 
-    <!-- Dialogue Titles -->
+    <!-- Dialogue Strings -->
     <string name="diafrg_add_case_study">Add Point of Interest</string>
+    <string name="diafrg_tag_ready">You won\'t be able to tag the preview any further. Continue the experiment only if you are ready of tagging all the objects.</string>
 
     <!-- Facts Elements -->
     <string name="poi_name">What is it\'s name?</string>
@@ -23,7 +24,7 @@
     <string name="poi_next">NEXT</string>
     <string name="poi_back">BACK</string>
     <string name="poi_finish">Finish</string>
-    <string name="poi_description_hint">Describe the building\'s appearance from top to bottom. Describe the colors, materials and style.</string>
+    <string name="poi_description_hint">In 50 words, describe the building\'s appearance from top to bottom.</string>
     <string name="poi_description">Describe the building\'s appearance.</string>
     <string name="poi_built_in">In what year was it built?</string>
     <string name="poi_built_by">Who built it?</string>

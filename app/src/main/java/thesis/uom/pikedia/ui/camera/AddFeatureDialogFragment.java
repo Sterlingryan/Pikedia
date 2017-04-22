@@ -35,23 +35,6 @@ public class AddFeatureDialogFragment extends DialogFragment{
     private String mParticipantID;
     private boolean mIsAdded = false;
 
-    public static interface OnCompleteListener {
-        public abstract void onComplete(boolean isSuccessful);
-    }
-
-    private OnCompleteListener mListener;
-
-    // make sure the Activity implemented it
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            this.mListener = (OnCompleteListener)activity;
-        }
-        catch (final ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnCompleteListener");
-        }
-    }
 
     /**
      * Public static constructor that creates fragment and
@@ -137,9 +120,6 @@ public class AddFeatureDialogFragment extends DialogFragment{
             mIsAdded = true;
             mAttributesDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_ATTRIBUTES).child(mName).child(Constants.CASE_STUDY_FEATURES).child(mParticipantID).push().child("feature");
             mAttributesDatabase.setValue(element);
-        }
-        else{
-            this.mListener.onComplete(false);
         }
     }
 

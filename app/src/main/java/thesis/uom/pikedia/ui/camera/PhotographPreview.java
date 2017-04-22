@@ -17,20 +17,17 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.model.CaseStudy;
 import thesis.uom.pikedia.ui.factswizard.FeaturesDescriptionActivity;
-import thesis.uom.pikedia.ui.factswizard.OpenEndedQuestionsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
 /**
  * Created by SterlingRyan on 3/23/2017.
  */
 
-public class PhotographPreview extends AppCompatActivity implements AddFeatureDialogFragment.OnCompleteListener {
+public class PhotographPreview extends AppCompatActivity{
 
     private ImageView mPreviewImageView;
     private ImageButton mFinishImageView;
@@ -53,7 +50,18 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
         mPhotoPath = getIntent().getExtras().getString("imagepath");
         mPreviewImageView = (ImageView) findViewById(R.id.imageViewPhotographPreview);
-        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
+//        Glide.with(this).load(R.dr).centerCrop().into(mPreviewImageView);
+        switch(getIntent().getExtras().getInt("imagepath")){
+            case 1:
+                Glide.with(this).load(R.drawable.valletta_city_gate).centerCrop().into(mPreviewImageView);
+                break;
+            case 2:
+                Glide.with(this).load(R.drawable.new_parliament_building).centerCrop().into(mPreviewImageView);
+                break;
+            case 3:
+                Glide.with(this).load(R.drawable.pjazza_teatru_rjal).centerCrop().into(mPreviewImageView);
+                break;
+        }
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -85,9 +93,8 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
                 if(counter == 0){
                     Toast.makeText(getApplicationContext(), "Tag the photo preview for building features", Toast.LENGTH_LONG).show();
                 }else {
-                    Intent intent = new Intent(getApplicationContext(), FeaturesDescriptionActivity.class);
-                    intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
-                    startActivity(intent);
+                    TagReadyDialogFragment tagReadyDialogFragment = new TagReadyDialogFragment();
+                    tagReadyDialogFragment.show(getFragmentManager(), "TagReadyDialogueFragment");
                 }
             }
         });
@@ -105,9 +112,9 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
     protected void onResume() {
         super.onResume();
 
-        mPhotoPath = getIntent().getExtras().getString("imagepath");
-        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
-        hideSystemUI();
+//        mPhotoPath = getIntent().getExtras().getString("imagepath");
+//        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
+//        hideSystemUI();
     }
 
     private void hideSystemUI(){
@@ -115,7 +122,7 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         |  View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         |  View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+                        |  View.SYSTEM_UI_FLAG_IMMERSIVE
         );
     }
 
@@ -126,23 +133,15 @@ public class PhotographPreview extends AppCompatActivity implements AddFeatureDi
         hideSystemUI();
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        File file = new File(mPhotoPath);
-        file.delete();
-    }
-
-    @Override
-    public void onComplete(boolean isSuccessful) {
-        if(!mIsSuccessful){
-
-        }
-    }
-
     public void removeView(){
         counter--;
         ((ViewGroup) mCurrentLocation.getParent()).removeView(mCurrentLocation);
+    }
+
+    public void continueExperiment(){
+        Intent intent = new Intent(getApplicationContext(), FeaturesDescriptionActivity.class);
+        intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+        startActivity(intent);
     }
 
 }

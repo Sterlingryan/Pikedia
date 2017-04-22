@@ -32,7 +32,7 @@ import thesis.uom.pikedia.utils.Constants;
  * Created by SterlingRyan on 3/23/2017.
  */
 
-public class CameraIntentPhotoPreview extends AppCompatActivity implements AddFeatureDialogFragment.OnCompleteListener {
+public class CameraIntentPhotoPreview extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView mPreviewImageView;
@@ -132,13 +132,6 @@ public class CameraIntentPhotoPreview extends AppCompatActivity implements AddFe
         DialogFragment dialog = AddIntentFeatureDialogFragment.newInstance(name, participantID);
         dialog.show(getFragmentManager(), "AddFeatureDialogFragment");
         hideSystemUI();
-    }
-
-    @Override
-    public void onComplete(boolean isSuccessful) {
-        if(!mIsSuccessful){
-
-        }
     }
 
     public void removeView(){

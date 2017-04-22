@@ -39,20 +39,14 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
     private MaterialSpinner mBuiltInSpinner;
     private MaterialSpinner mTypeOfArchitectureSpinner;
     private MaterialSpinner mArtisticStyleSpinner;
-    private MaterialSpinner mDepictionSpinner;
-
 
     private ArrayAdapter<String> mBuiltInAdapter;
     private ArrayAdapter<String> mTypeOfArchitectureAdapter;
     private ArrayAdapter<String> mArtisticStyleAdapter;
-    private ArrayAdapter<String> mDepictionAdapter;
 
     private ArrayList<String> mBuiltInList;
     private ArrayList<String> mTypeOfArchitectureList;
     private ArrayList<String> mArtisticStyleList;
-    private ArrayList<String> mDepictionList;
-
-    private boolean mIsAdded = false;
 
     private CaseStudy mCaseStudy;
 
@@ -71,27 +65,22 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
     private void initialize(){
         mBuiltInSpinner = (MaterialSpinner) findViewById(R.id.spinnerBuiltIn);
         mArtisticStyleSpinner = (MaterialSpinner) findViewById(R.id.spinnerArtisticStyle);
-        mDepictionSpinner = (MaterialSpinner) findViewById(R.id.spinnerDepiction);
         mTypeOfArchitectureSpinner = (MaterialSpinner) findViewById(R.id.spinnerTypeOfArchitecture);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         LinearLayout mNextButton = (LinearLayout) findViewById(R.id.nextBtn);
         ImageView mBackButton = (ImageView) findViewById(R.id.backBtn);
         final FloatingActionButton mAddBuiltInButton = (FloatingActionButton) findViewById(R.id.addBuiltInImageButton);
-        final FloatingActionButton mAddDepictionButton = (FloatingActionButton) findViewById(R.id.addDepictionImageButton);
         final FloatingActionButton mAddArtisticStyleButton = (FloatingActionButton) findViewById(R.id.addArtisticStyleImageButton);
         FloatingActionButton mAddTypeOfArchitectureButton = (FloatingActionButton) findViewById(R.id.addTypeOfArchitectureImageButton);
 
-        mDepictionList = new ArrayList<>();
         mArtisticStyleList = new ArrayList<>();
         mBuiltInList = new ArrayList<>();
         mTypeOfArchitectureList = new ArrayList<>();
 
-        mDepictionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mDepictionList);
         mArtisticStyleAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mArtisticStyleList);
         mBuiltInAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mBuiltInList);
         mTypeOfArchitectureAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mTypeOfArchitectureList);
 
-        mDepictionSpinner.setAdapter(mDepictionAdapter);
         mArtisticStyleSpinner.setAdapter(mArtisticStyleAdapter);
         mBuiltInSpinner.setAdapter(mBuiltInAdapter);
         mTypeOfArchitectureSpinner.setAdapter(mTypeOfArchitectureAdapter);
@@ -102,7 +91,6 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), OneAnswerQuestionsTwoActivity.class);
-                mCaseStudy.setDepiction(mDepictionSpinner.getSelectedItem().toString());
                 mCaseStudy.setArtisticStyle(mArtisticStyleSpinner.getSelectedItem().toString());
                 mCaseStudy.setBuiltIn(mBuiltInSpinner.getSelectedItem().toString());
                 mCaseStudy.setTypesOfArchitecture(mTypeOfArchitectureSpinner.getSelectedItem().toString());
@@ -132,12 +120,6 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
             }
         });
 
-        mAddDepictionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddAttributeDialog("Add Depiction",mCaseStudy.getName(), Constants.CASE_STUDY_DEPICTION);
-            }
-        });
 
         mAddTypeOfArchitectureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,23 +142,6 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                     HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
                     mBuiltInList.add(AttributeList.get("element"));
                     mBuiltInSpinner.setAdapter(mBuiltInAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        mCaseStudiesDatabase.child(Constants.CASE_STUDY_DEPICTION).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mDepictionAdapter.clear();
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-                    HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
-                    mDepictionList.add(AttributeList.get("element"));
-                    mDepictionSpinner.setAdapter(mDepictionAdapter);
                 }
             }
 

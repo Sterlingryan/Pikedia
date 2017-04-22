@@ -150,45 +150,6 @@
                         app:ms_floatingLabelText="@string/poi_artistic_style"/>
 
             </LinearLayout>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp">
-
-                <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/addDepictionImageButton"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:backgroundTint="@color/colorPrimary"
-                        android:src="@drawable/ic_add_white_18dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginRight="25dp"
-                        app:fabSize="mini"
-                        android:elevation="6dp"
-                        app:pressedTranslationZ="12dp"/>
-
-                <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinnerDepiction"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_weight="6"
-                        app:ms_enableFloatingLabel="true"
-                        app:ms_enableErrorLabel="false"
-                        app:ms_highlightColor="@color/colorPrimary"
-                        app:ms_baseColor="@color/line"
-                        android:isScrollContainer="true"
-                        android:paddingBottom="16dp"
-                        android:paddingTop="16dp"
-                        app:ms_hintColor="@color/secondary_text"
-                        app:ms_floatingLabelColor="@color/secondary_text"
-                        app:ms_hint="@string/poi_depiction"
-                        app:ms_floatingLabelText="@string/poi_depiction"/>
-
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

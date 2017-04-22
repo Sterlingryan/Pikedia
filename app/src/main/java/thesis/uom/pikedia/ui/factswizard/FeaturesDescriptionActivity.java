@@ -80,13 +80,6 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
             }
         });
 
-        ImageView backBtn = (ImageView) findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
     }
 
@@ -153,20 +146,16 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
         public View getView(final int position, View convertView, ViewGroup parent) {
 
             final ViewHolder holder;
-            if(convertView == null){
-                convertView = getLayoutInflater().inflate(R.layout.single_feature, null);
-                holder = new ViewHolder();
-                holder.textView = (TextView) convertView.findViewById(R.id.featureTextView);
-                holder.textView.setText(mFeaturesArrayList.get(position));
-                holder.editText = (MaterialEditText) convertView.findViewById(R.id.materialEditTextFeature);
-                holder.editText.setHorizontallyScrolling(false);
-                holder.editText.setLines(5);
-                holder.editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                convertView.setTag(holder);
-            }
-            else {
-                holder = (ViewHolder) convertView.getTag();
-            }
+
+            convertView = getLayoutInflater().inflate(R.layout.single_feature, null);
+            holder = new ViewHolder();
+            holder.textView = (TextView) convertView.findViewById(R.id.featureTextView);
+            holder.textView.setText(mFeaturesArrayList.get(position));
+            holder.editText = (MaterialEditText) convertView.findViewById(R.id.materialEditTextFeature);
+            holder.editText.setHorizontallyScrolling(false);
+            holder.editText.setLines(5);
+//            holder.editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+            convertView.setTag(holder);
 
             final Line line = mLinesArrayList.get(position);
 

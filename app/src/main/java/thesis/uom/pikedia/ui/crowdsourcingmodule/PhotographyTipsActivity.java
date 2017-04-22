@@ -73,11 +73,6 @@ public class PhotographyTipsActivity extends AppCompatActivity {
             }
         });
 
-        if(!displayGpsStatus()) {
-            alertbox("GPS Status", "GPS is currently offline");
-        } else {
-
-        }
         mLocationListener = new MyLocationListener();
         Location l = getLastKnownLocation();
         if (l != null) {
@@ -92,48 +87,7 @@ public class PhotographyTipsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        //mLocationManager.removeUpdates(mLocationListener);
-    }
-
-    private Boolean displayGpsStatus() {
-        ContentResolver contentResolver = getBaseContext().getContentResolver();
-        boolean gpsStatus = Settings.Secure
-                .isLocationProviderEnabled(contentResolver,
-                        LocationManager.GPS_PROVIDER);
-        if (gpsStatus) {
-            return true;
-
-        } else {
-            return false;
-        }
-    }
-
-    /*----------Method to create an AlertBox ------------- */
-    protected void alertbox(String title, String mymessage) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your Device's GPS is Disable")
-                .setCancelable(false)
-                .setTitle("GPS Status")
-                .setPositiveButton("Gps On",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // finish the current activity
-                                // AlertBoxAdvance.this.finish();
-                                Intent myIntent = new Intent(
-                                        Settings.ACTION_SECURITY_SETTINGS);
-                                startActivity(myIntent);
-                                dialog.cancel();
-                            }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // cancel the dialog box
-                                dialog.cancel();
-                            }
-                        });
-        AlertDialog alert = builder.create();
-        alert.show();
+        mLocationManager.removeUpdates(mLocationListener);
     }
 
     private Location getLastKnownLocation() {

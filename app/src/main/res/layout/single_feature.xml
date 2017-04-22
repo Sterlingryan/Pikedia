@@ -33,14 +33,10 @@
             app:met_baseColor="@color/secondary_text"
             app:met_underlineColor="@color/line"
             style="@style/MyEditTextTheme"
+            android:inputType="textImeMultiLine"
+            android:imeOptions="actionNext"
             android:paddingBottom="16dp"
-            android:lines="3"
-            android:inputType="textCapSentences|textAutoCorrect|textCapWords"
-            android:capitalize="sentences"
-            android:scrollHorizontally="false"
-            app:met_minCharacters="100"
-            android:focusable="true"
-            android:windowSoftInputMode="adjustUnspecified"/>
+            android:scrollHorizontally="false"/>
 
 </LinearLayout>
 

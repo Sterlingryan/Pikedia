@@ -24,21 +24,21 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.model.CaseStudy;
 import thesis.uom.pikedia.ui.camera.CameraActivity;
 import thesis.uom.pikedia.ui.camera.CameraIntentPhotoPreview;
+import thesis.uom.pikedia.ui.camera.PhotographPreview;
 import thesis.uom.pikedia.ui.crowdsourcingmodule.ExperimentWizardActivity;
 import thesis.uom.pikedia.ui.factswizard.OpenEndedQuestionsActivity;
 import thesis.uom.pikedia.ui.questions.QuestionsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
-/**
- * Created by SterlingRyan on 3/23/2017.
- */
-
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
     private ArrayList<String> mCaseStudyList;
+
+    private CaseStudy mCaseStudy = new CaseStudy();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,10 +85,17 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    intent = new Intent(getApplicationContext(), CameraActivity.class);
-                    intent.putExtra(Constants.PARTICIPANT_ID_KEY,getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position-1));
+                    String caseName = "";
+                    intent = new Intent(getApplicationContext(), PhotographPreview.class);
+                    mCaseStudy.setParticipantID(getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+                    mCaseStudy.setName(mCaseStudyList.get(position - 1));
+                    intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+                    intent.putExtra("imagepath",position - 1);
                     startActivity(intent);
+//                    intent = new Intent(getApplicationContext(), CameraActivity.class);
+//                    intent.putExtra(Constants.PARTICIPANT_ID_KEY,getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+//                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position-1));
+//                    startActivity(intent);
                 }
 
 

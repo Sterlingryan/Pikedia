@@ -20,17 +20,26 @@
             android:theme="@style/AppTheme">
         <activity android:name=".ui.MainActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".ui.camera.PhotographPreview"/>
+        <activity android:name=".ui.camera.PhotographPreview"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".ui.camera.CameraActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".ui.factswizard.OpenEndedQuestionsActivity"/>
-        <activity android:name=".ui.factswizard.OneAnswerQuestionsActivity"/>
-        <activity android:name=".ui.factswizard.OneAnswerQuestionsTwoActivity"/>
-        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsActivity"/>
-        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsOneActivity"/>
-        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsTwoActivity"/>
-        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationOne"/>
-        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationTwo"/>
+        <activity android:name=".ui.factswizard.OpenEndedQuestionsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.factswizard.OneAnswerQuestionsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.factswizard.OneAnswerQuestionsTwoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsOneActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.factswizard.MultipleAnswerQuestionsTwoActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationOne"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.participantsinformation.ParticipantsBasicInformationTwo"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".ui.crowdsourcingmodule.ExperimentWizardActivity"
                   android:screenOrientation="portrait">
             <intent-filter>
@@ -39,15 +48,24 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.camera.FeatureCaptureActivity"/>
-        <activity android:name=".ui.camera.CameraIntentPhotoPreview"/>
-        <activity android:name=".ui.factswizard.FeatureInformationActivity"/>
-        <activity android:name=".ui.crowdsourcingmodule.PhotographyTipsActivity"/>
-        <activity android:name=".ui.crowdsourcingmodule.FeaturePhotographyTipsActivity"/>
-        <activity android:name=".ui.crowdsourcingmodule.PointOfInterestShowCaseActivity"/>
-        <activity android:name=".ui.questions.QuestionsActivity"/>
-        <activity android:name=".ui.questions.AnswersActivity"/>
-        <activity android:name=".ui.factswizard.FeaturesDescriptionActivity"/>
+        <activity android:name=".ui.camera.FeatureCaptureActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.camera.CameraIntentPhotoPreview"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.factswizard.FeatureInformationActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.crowdsourcingmodule.PhotographyTipsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.crowdsourcingmodule.FeaturePhotographyTipsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.crowdsourcingmodule.PointOfInterestShowCaseActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.questions.QuestionsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.questions.AnswersActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.factswizard.FeaturesDescriptionActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
