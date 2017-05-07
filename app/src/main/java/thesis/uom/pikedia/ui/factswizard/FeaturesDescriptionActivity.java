@@ -76,6 +76,7 @@ public class FeaturesDescriptionActivity extends AppCompatActivity{
                 Intent intent = new Intent(getApplicationContext(), OpenEndedQuestionsActivity.class);
                 mCaseStudy.setFeatures(createFeaturesHashmap());
                 intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+                intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
                 startActivity(intent);
             }
         });

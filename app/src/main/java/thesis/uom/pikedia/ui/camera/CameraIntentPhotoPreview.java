@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.model.CaseStudy;
 import thesis.uom.pikedia.ui.factswizard.FeaturesDescriptionActivity;
 import thesis.uom.pikedia.ui.factswizard.OpenEndedQuestionsActivity;
 import thesis.uom.pikedia.utils.Constants;
@@ -38,10 +39,9 @@ public class CameraIntentPhotoPreview extends AppCompatActivity {
     private ImageView mPreviewImageView;
     private ImageButton mFinishImageView;
     private ImageView mBackImageButton;
-    private boolean mIsSuccessful = true;
     private int counter = 0;
-
     private ImageView mCurrentLocation;
+    private CaseStudy mCaseStudy;
 
 
     @Override
@@ -79,6 +79,7 @@ public class CameraIntentPhotoPreview extends AppCompatActivity {
 
     private void initialize(){
         mPreviewImageView = (ImageView) findViewById(R.id.imageViewPhotographPreview);
+        mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -97,7 +98,7 @@ public class CameraIntentPhotoPreview extends AppCompatActivity {
                     mCurrentLocation.setImageDrawable(getResources().getDrawable(
                             R.drawable.ic_location_searching_black_24dp));
                     ((ViewGroup) v).addView(mCurrentLocation);
-                    showAddFeatureDialogue(getIntent().getExtras().getString(Constants.CASE_STUDY), getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+                    showAddFeatureDialogue(mCaseStudy.getName(),mCaseStudy.getParticipantID() );
                 }
                 return false;
             }
@@ -109,12 +110,10 @@ public class CameraIntentPhotoPreview extends AppCompatActivity {
             public void onClick(View v) {
                 if(counter == 0){
                     Toast.makeText(getApplicationContext(), "Tag the photo preview for building features", Toast.LENGTH_LONG).show();
-                }else {
-                    Intent intent = new Intent(getApplicationContext(), FeaturesDescriptionActivity.class);
-                    intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-                    intent.putExtra(Constants.CASE_STUDY, getIntent().getExtras().getString(Constants.CASE_STUDY));
-                    startActivity(intent);
-                }
+                } else {
+                TagReadyDialogIntentFragment tagReadyDialogIntentFragment = new TagReadyDialogIntentFragment();
+                tagReadyDialogIntentFragment.show(getFragmentManager(), "TagReadyDialogueIntentFragment");
+            }
             }
         });
 
@@ -144,6 +143,12 @@ public class CameraIntentPhotoPreview extends AppCompatActivity {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
+    }
+    public void continueExperiment(){
+        Intent intent = new Intent(getApplicationContext(), FeaturesDescriptionActivity.class);
+        intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+        intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
+        startActivity(intent);
     }
 
 }

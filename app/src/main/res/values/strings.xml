@@ -24,7 +24,7 @@
     <string name="poi_next">NEXT</string>
     <string name="poi_back">BACK</string>
     <string name="poi_finish">Finish</string>
-    <string name="poi_description_hint">In 50 words, describe the building\'s appearance from top to bottom.</string>
+    <string name="poi_description_hint">In around 50 words, describe the building\'s appearance from top to bottom.</string>
     <string name="poi_description">Describe the building\'s appearance.</string>
     <string name="poi_built_in">In what year was it built?</string>
     <string name="poi_built_by">Who built it?</string>
@@ -32,6 +32,7 @@
     <string name="poi_year">Year</string>
     <string name="poi_event">Event</string>
     <string name="poi_religion">Which religion is it associated with?</string>
+    <string name="poi_religion_question">Is the point of interest associated with a religion ?</string>
     <string name="poi_purpose">What purpose does the point of interest have?</string>
     <string name="poi_purpose_hint">What purpose does it have?, does it represent a historical event?, does it provide a service?</string>
     <string name="poi_language">What is the language used?</string>
@@ -51,7 +52,7 @@
 
     <!-- Experiment Wizard Texts -->
     <string name="expwzd_welcome">Welcome to "Crowdsourcing of Information on Points of Interest" experiment using Pikedia</string>
-    <string name="expwzd_brief_experiment_description">This experiment is being conducted to gather information on buildings or objects that are of interest.The information that you give in the study will be handled confidentially.</string>
+    <string name="expwzd_brief_experiment_description">This experiment is being conducted to gather information on buildings or objects that are of interest.</string>
     <string name="expwzd_start_experiment">Kindly, tap on the bottom arrow to start the experiment</string>
     <string name="expwzd_feature_description">Start tagging the photograph preview for the building\'s features such as doors, statue, etc by tapping on the screen</string>
 

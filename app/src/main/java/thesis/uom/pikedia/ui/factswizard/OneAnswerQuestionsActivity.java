@@ -8,17 +8,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +43,10 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
     private ArrayList<String> mBuiltInList;
     private ArrayList<String> mTypeOfArchitectureList;
     private ArrayList<String> mArtisticStyleList;
+
+    private int mBuiltInCounter;
+    private int mArchitectureTypeCounter;
+    private int mArtisticStyleCounter;
 
     private CaseStudy mCaseStudy;
 
@@ -85,6 +85,11 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
         mBuiltInSpinner.setAdapter(mBuiltInAdapter);
         mTypeOfArchitectureSpinner.setAdapter(mTypeOfArchitectureAdapter);
 
+        mArchitectureTypeCounter = 0;
+        mBuiltInCounter = 0;
+        mArtisticStyleCounter = 0;
+
+
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +99,7 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                 mCaseStudy.setArtisticStyle(mArtisticStyleSpinner.getSelectedItem().toString());
                 mCaseStudy.setBuiltIn(mBuiltInSpinner.getSelectedItem().toString());
                 mCaseStudy.setTypesOfArchitecture(mTypeOfArchitectureSpinner.getSelectedItem().toString());
+                intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
                 intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                 startActivity(intent);
             }
@@ -143,6 +149,12 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                     mBuiltInList.add(AttributeList.get("element"));
                     mBuiltInSpinner.setAdapter(mBuiltInAdapter);
                 }
+
+                if(mBuiltInCounter >= 1){
+                    selectLastElementSelected(Constants.CASE_STUDY_BUILT_IN);
+                }
+
+                mBuiltInCounter++;
             }
 
             @Override
@@ -160,6 +172,12 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                     mArtisticStyleList.add(AttributeList.get("element"));
                     mArtisticStyleSpinner.setAdapter(mArtisticStyleAdapter);
                 }
+
+                if(mArtisticStyleCounter >= 1){
+                    selectLastElementSelected(Constants.CASE_STUDY_ARTISTIC_STYLE);
+                }
+
+                mArtisticStyleCounter++;
             }
 
             @Override
@@ -177,6 +195,12 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
                     mTypeOfArchitectureList.add(AttributeList.get("element"));
                     mTypeOfArchitectureSpinner.setAdapter(mTypeOfArchitectureAdapter);
                 }
+
+                if(mArchitectureTypeCounter >= 1){
+                    selectLastElementSelected(Constants.CASE_STUDY_ARCHITECTURE_TYPE);
+                }
+
+                mArchitectureTypeCounter++;
             }
 
             @Override
@@ -196,5 +220,19 @@ public class OneAnswerQuestionsActivity extends AppCompatActivity {
         /* Create an instance of the dialog fragment and show it */
         DialogFragment dialog = AddNewNumbersDialogFragment.newInstance(title, caseStudyName, attribute, mCaseStudy.getParticipantID());
         dialog.show(getFragmentManager(), "AddNumbersDialogFragment");
+    }
+
+    protected void selectLastElementSelected(String attribute){
+        switch (attribute){
+            case Constants.CASE_STUDY_BUILT_IN:
+                mBuiltInSpinner.setSelection(mBuiltInList.size());
+                break;
+            case Constants.CASE_STUDY_ARCHITECTURE_TYPE:
+                mTypeOfArchitectureSpinner.setSelection(mTypeOfArchitectureList.size());
+                break;
+            case Constants.CASE_STUDY_ARTISTIC_STYLE:
+                mArtisticStyleSpinner.setSelection(mArtisticStyleList.size());
+                break;
+        }
     }
 }

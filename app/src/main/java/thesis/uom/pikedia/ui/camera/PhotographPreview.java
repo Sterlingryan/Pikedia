@@ -50,18 +50,7 @@ public class PhotographPreview extends AppCompatActivity{
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
         mPhotoPath = getIntent().getExtras().getString("imagepath");
         mPreviewImageView = (ImageView) findViewById(R.id.imageViewPhotographPreview);
-//        Glide.with(this).load(R.dr).centerCrop().into(mPreviewImageView);
-        switch(getIntent().getExtras().getInt("imagepath")){
-            case 1:
-                Glide.with(this).load(R.drawable.valletta_city_gate).centerCrop().into(mPreviewImageView);
-                break;
-            case 2:
-                Glide.with(this).load(R.drawable.new_parliament_building).centerCrop().into(mPreviewImageView);
-                break;
-            case 3:
-                Glide.with(this).load(R.drawable.pjazza_teatru_rjal).centerCrop().into(mPreviewImageView);
-                break;
-        }
+        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
@@ -112,9 +101,9 @@ public class PhotographPreview extends AppCompatActivity{
     protected void onResume() {
         super.onResume();
 
-//        mPhotoPath = getIntent().getExtras().getString("imagepath");
-//        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
-//        hideSystemUI();
+        mPhotoPath = getIntent().getExtras().getString("imagepath");
+        Glide.with(this).load(new File(mPhotoPath)).centerCrop().into(mPreviewImageView);
+        hideSystemUI();
     }
 
     private void hideSystemUI(){
@@ -141,6 +130,7 @@ public class PhotographPreview extends AppCompatActivity{
     public void continueExperiment(){
         Intent intent = new Intent(getApplicationContext(), FeaturesDescriptionActivity.class);
         intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+        intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
         startActivity(intent);
     }
 

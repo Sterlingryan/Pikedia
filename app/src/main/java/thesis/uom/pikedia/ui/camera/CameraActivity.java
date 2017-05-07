@@ -62,6 +62,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import thesis.uom.pikedia.R;
+import thesis.uom.pikedia.model.CaseStudy;
 import thesis.uom.pikedia.ui.crowdsourcingmodule.PhotographyTipsActivity;
 import thesis.uom.pikedia.utils.Constants;
 
@@ -115,8 +116,8 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     }
                     Intent intent = new Intent(getApplicationContext(), PhotographyTipsActivity.class);
                     intent.putExtra("imagepath", mFile.getAbsolutePath());
-                    intent.putExtra(Constants.PARTICIPANT_ID_KEY, getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-                    intent.putExtra(Constants.CASE_STUDY, getIntent().getExtras().getString(Constants.CASE_STUDY));
+                    intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
+                    intent.putExtra(Constants.CASE_STUDY, (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY));
                     startActivity(intent);
 
                 }

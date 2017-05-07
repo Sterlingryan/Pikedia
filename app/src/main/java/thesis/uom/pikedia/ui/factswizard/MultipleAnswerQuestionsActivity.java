@@ -46,7 +46,9 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
     private FloatingActionButton mAddAnswerButton;
     private ArrayList<String> mAnswerList;
     private ArrayList<String> mChosenAnswerList;
+    private ArrayList<Integer> mChosenAnswerIdList;
     private AnswerAdapter mAnswerAdapter;
+    private int counter;
 
     private CaseStudy mCaseStudy;
     private String mAttribute;
@@ -71,10 +73,13 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
 
         mAnswerList = new ArrayList<>();
         mChosenAnswerList = new ArrayList<>();
+        mChosenAnswerIdList = new ArrayList<>();
         mAnswerAdapter = new AnswerAdapter();
 
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
         mAttribute = getIntent().getExtras().getString(Constants.CASE_STUDY_ATTTRIBUTE);
+
+        counter = 0;
 
         mList.setAdapter(mAnswerAdapter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -99,6 +104,7 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MultipleAnswerQuestionsOneActivity.class);
                 intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                 intent.putExtra(Constants.CASE_STUDY_ATTTRIBUTE, Constants.CASE_STUDY_SERVICES);
+                intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
                 startActivity(intent);
             }
         });
@@ -123,6 +129,7 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
                     mAnswerList.add(AttributeList.get("element"));
                 }
                 mList.setAdapter(answerAdapter);
+                counter++;
             }
 
             @Override
@@ -161,7 +168,7 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             ViewHolder holder = null;
             if (convertView == null) {
@@ -185,6 +192,7 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
                     String chosenAnswer = (String) cB.getTag();
                     if(cB.isChecked()){
                         mChosenAnswerList.add(chosenAnswer);
+                        mChosenAnswerIdList.add(position);
                     } else {
                         for(int i = 0; i < mChosenAnswerList.size(); i++){
                             if(chosenAnswer.equals(mChosenAnswerList.get(i))){
@@ -194,6 +202,20 @@ public class MultipleAnswerQuestionsActivity extends AppCompatActivity {
                     }
                 }
             });
+
+            if(counter > 1){
+                for(int i = 0; i < mChosenAnswerIdList.size(); i++){
+                    if(position == mChosenAnswerIdList.get(i)){
+                        holder.checkBox.setChecked(true);
+                    }
+                }
+
+                if(position == mAnswerList.size() - 1){
+                    mChosenAnswerList.add(mAnswerList.get(mAnswerList.size() - 1));
+                    mChosenAnswerIdList.add(position);
+                    holder.checkBox.setChecked(true);
+                }
+            }
 
             return convertView;
         }

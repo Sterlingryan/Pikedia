@@ -34,20 +34,21 @@ import thesis.uom.pikedia.utils.Constants;
  */
 
 public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
-    private MaterialSpinner mLanguageSpinner;
     private MaterialSpinner mBuiltBySpinner;
     private MaterialSpinner mArchitectSpinner;
     private MaterialSpinner mReligionSpinner;
 
-    private ArrayAdapter<String> mLanguageAdapter;
     private ArrayAdapter<String> mBuiltByAdapter;
     private ArrayAdapter<String> mArchitectAdapter;
     private ArrayAdapter<String> mReligionAdapter;
 
-    private ArrayList<String> mLanguageList;
     private ArrayList<String> mBuiltByList;
     private ArrayList<String> mArchitectList;
     private ArrayList<String> mReligionList;
+
+    private int mBuiltByCounter;
+    private int mArchitectCounter;
+    private int mReligionCounter;
 
     private CaseStudy mCaseStudy;
 
@@ -64,7 +65,6 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
      * Initialize views
      */
     private void initialize(){
-        mLanguageSpinner = (MaterialSpinner) findViewById(R.id.spinnerLanguage);
         mBuiltBySpinner = (MaterialSpinner) findViewById(R.id.spinnerBuiltBy);
         mArchitectSpinner = (MaterialSpinner) findViewById(R.id.spinnerArchitect);
         mReligionSpinner = (MaterialSpinner) findViewById(R.id.spinnerReligion);
@@ -74,22 +74,22 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
         FloatingActionButton mAddBuiltByButton = (FloatingActionButton) findViewById(R.id.addBuiltByImageButton);
         FloatingActionButton mAddArchitectButton = (FloatingActionButton) findViewById(R.id.addArchitectImageButton);
         FloatingActionButton mReligionButton = (FloatingActionButton) findViewById(R.id.addReligionImageButton);
-        FloatingActionButton mLanguageButton = (FloatingActionButton) findViewById(R.id.addLanguageImageButton);
 
         mBuiltByList = new ArrayList<>();
         mArchitectList = new ArrayList<>();
         mReligionList = new ArrayList<>();
-        mLanguageList = new ArrayList<>();
 
-        mLanguageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mLanguageList);
         mBuiltByAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mBuiltByList);
         mArchitectAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mArchitectList);
         mReligionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,mReligionList);
 
-        mLanguageSpinner.setAdapter(mLanguageAdapter);
         mBuiltBySpinner.setAdapter(mBuiltByAdapter);
         mArchitectSpinner.setAdapter(mArchitectAdapter);
         mReligionSpinner.setAdapter(mReligionAdapter);
+
+        mArchitectCounter = 0;
+        mReligionCounter = 0;
+        mBuiltByCounter = 0;
 
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
 
@@ -100,9 +100,9 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
                 mCaseStudy.setBuiltBy(mBuiltBySpinner.getSelectedItem().toString());
                 mCaseStudy.setArchitect(mArchitectSpinner.getSelectedItem().toString());
                 mCaseStudy.setReligion(mReligionSpinner.getSelectedItem().toString());
-                mCaseStudy.setLanguageOf(mLanguageSpinner.getSelectedItem().toString());
                 intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                 intent.putExtra(Constants.CASE_STUDY_ATTTRIBUTE, Constants.CASE_STUDY_MATERIALS);
+                intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
                 startActivity(intent);
             }
         });
@@ -135,12 +135,6 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
             }
         });
 
-        mLanguageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddAttributeDialog("Add Language",mCaseStudy.getName(), Constants.CASE_STUDY_LANGUAGES);
-            }
-        });
 
         toolbar.setTitle(R.string.ttl_background_information);
         toolbar.setTitleTextColor(Color.WHITE);
@@ -157,6 +151,12 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
                     mBuiltByList.add(AttributeList.get("element"));
                     mBuiltBySpinner.setAdapter(mBuiltByAdapter);
                 }
+
+                if(mBuiltByCounter >= 1){
+                    selectLastElementSelected(Constants.CASE_STUDY_BUILT_BY);
+                }
+
+                mBuiltByCounter++;
             }
 
             @Override
@@ -174,23 +174,12 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
                     mArchitectList.add(AttributeList.get("element"));
                     mArchitectSpinner.setAdapter(mArchitectAdapter);
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        mCaseStudiesDatabase.child(Constants.CASE_STUDY_LANGUAGES).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                mLanguageAdapter.clear();
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-                    HashMap<String,String> AttributeList = (HashMap<String,String>)child.getValue();
-                    mLanguageList.add(AttributeList.get("element"));
-                    mLanguageSpinner.setAdapter(mLanguageAdapter);
+                if(mArchitectCounter >= 1){
+                    selectLastElementSelected(Constants.CASE_STUDY_ARCHITECT);
                 }
+
+                mArchitectCounter++;
             }
 
             @Override
@@ -208,6 +197,12 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
                     mReligionList.add(AttributeList.get("element"));
                     mReligionSpinner.setAdapter(mReligionAdapter);
                 }
+
+                if(mReligionCounter >= 1){
+                    selectLastElementSelected(Constants.CASE_STUDY_RELIGION);
+                }
+
+                mReligionCounter++;
             }
 
             @Override
@@ -221,5 +216,19 @@ public class OneAnswerQuestionsTwoActivity extends AppCompatActivity {
         /* Create an instance of the dialog fragment and show it */
         DialogFragment dialog = AddNewElementDialogFragment.newInstance(title, caseStudyName, attribute, mCaseStudy.getParticipantID());
         dialog.show(getFragmentManager(), "AddAttributeDialogFragment");
+    }
+
+    protected void selectLastElementSelected(String attribute){
+        switch (attribute){
+            case Constants.CASE_STUDY_ARCHITECT:
+                mArchitectSpinner.setSelection(mArchitectList.size());
+                break;
+            case Constants.CASE_STUDY_RELIGION:
+                mReligionSpinner.setSelection(mReligionList.size());
+                break;
+            case Constants.CASE_STUDY_BUILT_BY:
+                mBuiltBySpinner.setSelection(mBuiltByList.size());
+                break;
+        }
     }
 }

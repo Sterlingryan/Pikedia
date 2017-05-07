@@ -28,6 +28,7 @@ public class CaseStudy implements Serializable{
     private String entranceFees;
     private HashMap<String,String> services;
     private String depiction;
+    private String time;
     private HashMap<String,String> historicalEvents;
     private HashMap<String,String> features;
 
@@ -204,5 +205,11 @@ public class CaseStudy implements Serializable{
         this.features = features;
     }
 
+    public String getTime() {
+        return time;
+    }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

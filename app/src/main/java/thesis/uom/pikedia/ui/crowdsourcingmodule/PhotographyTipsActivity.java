@@ -45,7 +45,7 @@ public class PhotographyTipsActivity extends AppCompatActivity {
     private LocationManager mLocationManager;
     private MyLocationListener mLocationListener;
 
-    private CaseStudy mCaseStudy = new CaseStudy();
+    private CaseStudy mCaseStudy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +57,18 @@ public class PhotographyTipsActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.mainImageView);
         textView.setText(R.string.expwzd_feature_description);
         imageView.setImageResource(R.drawable.ic_edit_location_white_48dp);
+        mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
 
-        mCaseStudy.setParticipantID(getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-        mCaseStudy.setName(getIntent().getExtras().getString(Constants.CASE_STUDY));
+        mLocationListener = new MyLocationListener();
+        Location l = getLastKnownLocation();
+        if (l != null) {
+            mLatitude = ((Double)l.getLatitude()).toString();
+            mLongitude = ((Double)l.getLongitude()).toString();
+        } else {
+            mLocationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
+        }
+
         mNextButton = (ImageView) findViewById(R.id.imageViewNext);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,20 +77,11 @@ public class PhotographyTipsActivity extends AppCompatActivity {
                 mCaseStudy.setLatitude(mLatitude);
                 Intent intent = new Intent(getApplicationContext(), PhotographPreview.class);
                 intent.putExtra("imagepath",getIntent().getExtras().getString("imagepath"));
+                intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
                 intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                 startActivity(intent);
             }
         });
-
-        mLocationListener = new MyLocationListener();
-        Location l = getLastKnownLocation();
-        if (l != null) {
-           mLatitude = ((Double)l.getLatitude()).toString();
-           mLongitude = ((Double)l.getLongitude()).toString();
-        } else {
-            mLocationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, 0, 0, mLocationListener);
-        }
     }
 
     @Override

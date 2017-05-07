@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,7 +49,9 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
     private FloatingActionButton mAddAnswerButton;
     private ArrayList<String> mAnswerList;
     private ArrayList<String> mChosenAnswerList;
+    private ArrayList<Integer> mChosenAnswerIdList;
     private AnswerAdapter mAnswerAdapter;
+    private int counter;
 
     private CaseStudy mCaseStudy;
     private String mAttribute;
@@ -73,10 +76,13 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
 
         mAnswerList = new ArrayList<>();
         mChosenAnswerList = new ArrayList<>();
+        mChosenAnswerIdList = new ArrayList<>();
         mAnswerAdapter = new AnswerAdapter();
 
         mCaseStudy = (CaseStudy) getIntent().getExtras().get(Constants.CASE_STUDY);
         mAttribute = getIntent().getExtras().getString(Constants.CASE_STUDY_ATTTRIBUTE);
+
+        counter = 0;
 
         mList.setAdapter(mAnswerAdapter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
@@ -86,7 +92,7 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
         mAddAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddAttributeDialog("Add " + mAttribute,mCaseStudy.getName(), mAttribute);
+                showAddAttributeDialog("Add " + mAttribute, mCaseStudy.getName(), mAttribute);
             }
         });
 
@@ -125,6 +131,7 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
                     mAnswerList.add(AttributeList.get("element"));
                 }
                 mList.setAdapter(answerAdapter);
+                counter++;
             }
 
             @Override
@@ -135,6 +142,8 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
     }
 
     private void saveCaseStudyToDatabase(){
+        long endTime = new Date().getTime() - getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS);
+        mCaseStudy.setTime(((Long) endTime).toString());
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(Constants.CASE_STUDY).push();
         ref.setValue(mCaseStudy);
     }
@@ -168,7 +177,7 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             ViewHolder holder = null;
             if (convertView == null) {
@@ -191,6 +200,7 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
                     CheckBox cB = (CheckBox) v;
                     String chosenAnswer = (String) cB.getTag();
                     if(cB.isChecked()){
+                        mChosenAnswerIdList.add(position);
                         mChosenAnswerList.add(chosenAnswer);
                     } else {
                         for(int i = 0; i < mChosenAnswerList.size(); i++){
@@ -202,9 +212,20 @@ public class MultipleAnswerQuestionsTwoActivity extends AppCompatActivity {
                 }
             });
 
+            if(counter > 1){
+                for(int i = 0; i < mChosenAnswerIdList.size(); i++){
+                    if(position == mChosenAnswerIdList.get(i)){
+                        holder.checkBox.setChecked(true);
+                    }
+                }
+
+                if(position == mAnswerList.size() - 1){
+                    mChosenAnswerList.add(mAnswerList.get(mAnswerList.size() - 1));
+                    mChosenAnswerIdList.add(position);
+                    holder.checkBox.setChecked(true);
+                }
+            }
             return convertView;
         }
-
-
     }
 }

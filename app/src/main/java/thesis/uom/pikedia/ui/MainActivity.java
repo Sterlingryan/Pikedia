@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import thesis.uom.pikedia.R;
 import thesis.uom.pikedia.model.CaseStudy;
@@ -80,25 +81,22 @@ public class MainActivity extends AppCompatActivity {
                 view.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_click_effect));
                 if (Build.VERSION.SDK_INT <= 20) {
                     intent = new Intent(getApplicationContext(), CameraIntentPhotoPreview.class);
-                    intent.putExtra(Constants.PARTICIPANT_ID_KEY,getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position-1));
+                    mCaseStudy.setParticipantID(getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
+                    mCaseStudy.setName(mCaseStudyList.get(position - 1));
+                    long startTime = new Date().getTime();
+                    intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, startTime);
+                    intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
                     startActivity(intent);
                 }
                 else{
-                    String caseName = "";
-                    intent = new Intent(getApplicationContext(), PhotographPreview.class);
+                    intent = new Intent(getApplicationContext(), CameraActivity.class);
                     mCaseStudy.setParticipantID(getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
                     mCaseStudy.setName(mCaseStudyList.get(position - 1));
+                    long startTime = new Date().getTime();
+                    intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, startTime);
                     intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
-                    intent.putExtra("imagepath",position - 1);
                     startActivity(intent);
-//                    intent = new Intent(getApplicationContext(), CameraActivity.class);
-//                    intent.putExtra(Constants.PARTICIPANT_ID_KEY,getIntent().getExtras().getString(Constants.PARTICIPANT_ID_KEY));
-//                    intent.putExtra(Constants.CASE_STUDY, mCaseStudyList.get(position-1));
-//                    startActivity(intent);
                 }
-
-
             }
         });
 

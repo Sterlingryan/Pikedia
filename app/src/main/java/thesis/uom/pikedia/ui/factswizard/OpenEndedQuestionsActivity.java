@@ -85,6 +85,7 @@ public class OpenEndedQuestionsActivity extends AppCompatActivity{
                     mCaseStudy.setDescription(mDescriptionEditText.getText().toString());
                     mCaseStudy.setPurpose(mPurposeEditText.getText().toString());
                     intent.putExtra(Constants.CASE_STUDY, mCaseStudy);
+                    intent.putExtra(Constants.CASE_STUDY_TIME_IN_MILISECONDS, getIntent().getExtras().getLong(Constants.CASE_STUDY_TIME_IN_MILISECONDS));
                     startActivity(intent);
                 }
 
